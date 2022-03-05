@@ -31,7 +31,7 @@ namespace EMI_RA.WPF
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
 
             var items = await clientApi.MeilleursPrixAsync(panier.Id);
 

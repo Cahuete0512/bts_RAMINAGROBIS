@@ -42,7 +42,7 @@ namespace EMI_RA.WPF
         {
 
             
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
 
             var fournisseurDTO = new API.Client.Fournisseurs()
             {

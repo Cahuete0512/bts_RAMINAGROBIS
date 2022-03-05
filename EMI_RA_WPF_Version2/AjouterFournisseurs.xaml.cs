@@ -42,7 +42,7 @@ namespace EMI_RA.WPF
             Email = email.Text;
             Adresse = adresse.Text;
 
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
             var fournisseursDTO = new EMI_RA.API.Client.Fournisseurs()
             {
 

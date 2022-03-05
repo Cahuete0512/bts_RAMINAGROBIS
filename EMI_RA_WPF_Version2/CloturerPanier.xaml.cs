@@ -28,7 +28,7 @@ namespace EMI_RA_WPF
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
             var cloturerPanier = clientApi.CloturerAsync(panier.Id);
         }
     }

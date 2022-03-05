@@ -46,7 +46,7 @@ namespace EMI_RA.WPF
             Adresse = adresse.Text;
 
 
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
 
             var adherentDTO = new EMI_RA.API.Client.Adherents()
             {

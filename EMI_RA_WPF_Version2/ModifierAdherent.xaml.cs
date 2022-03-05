@@ -37,7 +37,7 @@ namespace EMI_RA.WPF
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
 
             var adherentDTO = new API.Client.Adherents()
             {

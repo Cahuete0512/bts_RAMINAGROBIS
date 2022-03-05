@@ -201,7 +201,7 @@ namespace EMI_RA.WPF
                 PaniersGlobaux paniers;
                 paniers = (PaniersGlobaux)GestionnaireDeFenetres.Panier.liste.SelectedItem;
 
-                var clientApi = new Client("https://localhost:44313/", new HttpClient());
+                var clientApi = new Client("https://localhost:5001/", new HttpClient());
                 var cloturerPanier = clientApi.CloturerAsync(paniers.Id);
 
                 MessageBox.Show("Le panier a été cloturé");
