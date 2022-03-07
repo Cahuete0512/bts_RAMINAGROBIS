@@ -27,7 +27,6 @@ namespace EMI_RA
             }
             return result;
         }
-
         public Adherents GetByID(int idAdherents)
         {
             var a = depotAdherents.GetByID(idAdherents);
@@ -40,7 +39,6 @@ namespace EMI_RA
                                  a.Email,
                                  a.Adresse);
         }
-
         public Adherents Insert(Adherents a)
         {
             var adherents = new Adherents_DAL(a.ID,
@@ -56,7 +54,6 @@ namespace EMI_RA
 
             return a;
         }
-
         public Adherents Update(Adherents a)
         {
             var adherents = new Adherents_DAL(a.ID,

@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using EMI_RA.DTO;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -73,8 +70,6 @@ namespace EMI_RA.API.Controllers
             int semaine = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(1), CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
 
             String filename = "Panier_" + annee + "_S" + semaine + ".csv";
-
-
 
             List<String> Panier = service.genererPanierString(annee, semaine, idFournisseur);
             var commande_DTO = new Commande_DTO()

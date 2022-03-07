@@ -15,8 +15,7 @@ namespace EMI_RA
         {
             var assoProduits = depot.GetAll()
                 .Select(a => new AssoProduitsFournisseurs(a.IdFournisseurs,
-                                        a.IdProduits
-                                        ))
+                                                          a.IdProduits))
                 .ToList();
 
             return assoProduits;
@@ -29,8 +28,7 @@ namespace EMI_RA
             foreach (var a in depot.GetByIdProduit(idProduits))
             {
                 AssoProduitsFournisseurs asso = new AssoProduitsFournisseurs(a.IdFournisseurs,
-                                        a.IdProduits
-                              );
+                                                                             a.IdProduits);
                 result.Add(asso);
             }
             return result;
@@ -40,23 +38,19 @@ namespace EMI_RA
             var a = depot.GetByIdFournisseurs(idFournisseurs);
 
             return new AssoProduitsFournisseurs(a.IdFournisseurs,
-                                        a.IdProduits
-                              );
+                                                a.IdProduits);
         }
         public AssoProduitsFournisseurs Insert(AssoProduitsFournisseurs a)
         {
             var assoProduits = new AssoProduitsFournisseurs_DAL(a.IdFournisseurs,
-                                        a.IdProduits);
+                                                                a.IdProduits);
             depot.Insert(assoProduits);
-
 
             return a;
         }
-
         public void Delete(int idProduits, int idFournisseurs)
         {
             depot.Delete(idProduits, idFournisseurs);
-
         }
     }
 }

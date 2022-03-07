@@ -21,8 +21,7 @@ namespace EMI_RA
                                                       l.IDProduits,
                                                       l.Quantite,
                                                       l.IDPaniersGlobaux,
-                                                      l.IDAdherents
-                                                      ))
+                                                      l.IDAdherents))
                 .ToList();
 
             return lignePanierGlobaux;
@@ -30,24 +29,25 @@ namespace EMI_RA
 
         public List<LignesPaniersGlobaux> GetLignesPaniersGlobauxByPanierGlobauxID(int idPaniersGlobaux)
         {
-            var liste = depot.GetByPanierGlobauxID(idPaniersGlobaux).Select(l => new LignesPaniersGlobaux(l.ID,
+            var liste = depot.GetByPanierGlobauxID(idPaniersGlobaux)
+                .Select(l => new LignesPaniersGlobaux(l.ID,
                                                       l.IDProduits,
                                                       l.Quantite,
                                                       l.IDPaniersGlobaux,
-                                                      l.IDAdherents
-                                                      )).ToList();
+                                                      l.IDAdherents))
+                .ToList();
 
             return liste;
         }
-
         public List<LignesPaniersGlobaux> GetLignesPaniersGlobauxByPanierGlobauxIDAndFournisseurID(int idPaniersGlobaux, int idFournisseurs)
         {
-            var liste = depot.GetByPanierGlobauxIDAndFournisseurID(idPaniersGlobaux, idFournisseurs).Select(l => new LignesPaniersGlobaux(l.ID,
+            var liste = depot.GetByPanierGlobauxIDAndFournisseurID(idPaniersGlobaux, idFournisseurs)
+                .Select(l => new LignesPaniersGlobaux(l.ID,
                                                       l.IDProduits,
                                                       l.Quantite,
                                                       l.IDPaniersGlobaux,
-                                                      l.IDAdherents
-                                                      )).ToList();
+                                                      l.IDAdherents))
+                .ToList();
 
             return liste;
         }
@@ -64,6 +64,5 @@ namespace EMI_RA
 
             return l;
         }
-
     }
 }

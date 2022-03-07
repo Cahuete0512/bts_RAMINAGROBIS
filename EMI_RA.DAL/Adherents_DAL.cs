@@ -19,9 +19,10 @@ namespace EMI_RA.DAL
 
         //constructeur par défaut 
         public Adherents_DAL(String societe, String civiliteContact, String nomContact, String prenomContact, String email, String adresse)
-        =>(Societe, CiviliteContact, NomContact, PrenomContact, Email, Adresse) = (societe, civiliteContact, nomContact, prenomContact, email, adresse);
+            =>(Societe, CiviliteContact, NomContact, PrenomContact, Email, Adresse) 
+            = (societe, civiliteContact, nomContact, prenomContact, email, adresse);
         public Adherents_DAL(int idAdherents, String societe, String civiliteContact, String nomContact, String prenomContact, String email, String adresse)
-                    => (ID, Societe, CiviliteContact, NomContact, PrenomContact, Email, Adresse) = (idAdherents, societe, civiliteContact, nomContact, prenomContact, email, adresse);
-
+            => (ID, Societe, CiviliteContact, NomContact, PrenomContact, Email, Adresse) 
+            = (idAdherents, societe, civiliteContact, nomContact, prenomContact, email, adresse);
     }
 }

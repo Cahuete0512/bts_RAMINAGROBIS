@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EMI_RA
 {
@@ -25,8 +23,7 @@ namespace EMI_RA
                                               f.PrenomContact,
                                               f.Email,
                                               f.Adresse,
-                                              f.DateAdhesion
-                        ))
+                                              f.DateAdhesion))
                 .ToList();
             
             return fournisseurs;
@@ -45,7 +42,6 @@ namespace EMI_RA
                                     f.Adresse,
                                     f.DateAdhesion);
         }
-
         public Fournisseurs Insert(Fournisseurs f)
         {
             var fournisseur = new Fournisseurs_DAL(f.IdFournisseurs,
@@ -55,14 +51,13 @@ namespace EMI_RA
                                                    f.PrenomContact,
                                                    f.Email,
                                                    f.Adresse,
-                                                   DateTime.Now
-                                                   );
+                                                   DateTime.Now);
             depot.Insert(fournisseur);
+
             f.IdFournisseurs = fournisseur.IdFournisseurs;
 
             return f;
         }
-
         public Fournisseurs Update(Fournisseurs f)
         {
             var fournisseur = new Fournisseurs_DAL(f.IdFournisseurs,
@@ -77,7 +72,6 @@ namespace EMI_RA
 
             return f;
         }
-
         public void Delete(Fournisseurs f)
         {
             var fournisseur = new Fournisseurs_DAL(f.IdFournisseurs,
@@ -106,7 +100,7 @@ namespace EMI_RA
             foreach (var produitCsv in produitsCsvListe)
             {
                 Produits produitsCorrespondant = null;
-                //List<Produits> produitsCorrespondants = produitsExistantsListe.Where(p => p.Reference.Equals(produitCsv.Reference)).ToList();
+
                 foreach(var produitBdd in produitsExistantsListe)
                 {
                     if (produitBdd.Reference.Equals(produitCsv.Reference)){
@@ -115,7 +109,6 @@ namespace EMI_RA
                     }
                 }
 
-                //if(produitsCorrespondants.Count == 0)
                 if (produitsCorrespondant == null)
                 {
                     Produits produitALier = produitsService.GetByRef(produitCsv.Reference);
@@ -124,7 +117,7 @@ namespace EMI_RA
                         produitALier = produitsService.Insert(produitCsv);
                     } else if (!produitALier.Disponible)
                     {
-                        // Si le produits n'était pas disponible, on le rend disponible
+                        // Si le produit n'était pas disponible, on le rend disponible
                         produitALier.Disponible = true;
                         produitsService.Update(produitALier);
                     }
@@ -135,7 +128,6 @@ namespace EMI_RA
             // les produits qui sont dans la BDD et non dans le fichier -> suppression du lien BDD
             foreach (var produitExistant in produitsExistantsListe)
             {
-                //List<Produits> produitCorrespondant = produitsCsvListe.Where(p => p.Reference.Equals(produitExistant.Reference)).ToList();
                 bool exists = false;
                 foreach (var produitCsv in produitsCsvListe)
                 {
@@ -172,7 +164,7 @@ namespace EMI_RA
             foreach (var produitCsv in produitsCsvListe)
             {
                 Produits produitsCorrespondant = null;
-                //List<Produits> produitsCorrespondants = produitsExistantsListe.Where(p => p.Reference.Equals(produitCsv.Reference)).ToList();
+
                 foreach (var produitBdd in produitsExistantsListe)
                 {
                     if (produitBdd.Reference.Equals(produitCsv.Reference))
@@ -182,7 +174,6 @@ namespace EMI_RA
                     }
                 }
 
-                //if(produitsCorrespondants.Count == 0)
                 if (produitsCorrespondant == null)
                 {
                     Produits produitALier = produitsService.GetByRef(produitCsv.Reference);
@@ -192,7 +183,7 @@ namespace EMI_RA
                     }
                     else if (!produitALier.Disponible)
                     {
-                        // Si le produits n'était pas disponible, on le rend disponible
+                        // Si le produit n'était pas disponible, on le rend disponible
                         produitALier.Disponible = true;
                         produitsService.Update(produitALier);
                     }
@@ -203,8 +194,8 @@ namespace EMI_RA
             // les produits qui sont dans la BDD et non dans le fichier -> suppression du lien BDD
             foreach (var produitExistant in produitsExistantsListe)
             {
-                //List<Produits> produitCorrespondant = produitsCsvListe.Where(p => p.Reference.Equals(produitExistant.Reference)).ToList();
                 bool exists = false;
+
                 foreach (var produitCsv in produitsCsvListe)
                 {
                     if (produitCsv.Reference.Equals(produitExistant.Reference))
@@ -226,7 +217,6 @@ namespace EMI_RA
                 }
             }
         }
-
         private List<Produits> recupProduitsCsv(IFormFile csvFile, int idFournisseurs)
         {
             List<Produits> produitsListe = new List<Produits>();

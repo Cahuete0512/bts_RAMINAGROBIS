@@ -1,10 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EMI_RA.DAL
 {
@@ -37,7 +33,6 @@ namespace EMI_RA.DAL
                                                         reader.GetString(5),
                                                         reader.GetString(6),
                                                         reader.GetDateTime(7)
-                                                       
                                                         );
 
                 listeDeFournisseurs.Add(fournisseur);
@@ -69,8 +64,7 @@ namespace EMI_RA.DAL
                                         reader.GetString(5),
                                         reader.GetString(6),
                                         reader.GetDateTime(7)
-                                       
-                                         );
+                                        );
             }
             else
                 throw new Exception($"Pas de fournisseur dans la BDD avec l'ID {idFournisseurs}");

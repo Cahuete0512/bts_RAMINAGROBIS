@@ -69,7 +69,6 @@ namespace EMI_RA.API.Controllers
             for (int i = 0; i < csvfile.Count(); i++)
             {
                 var liste = csvfile.ElementAt(i).Split(';');
-                //var values = liste.ElementAt(i).ToString().Split(';');
                 string reference = liste[0];
                 int quantite = int.Parse(liste[1]);
                 float prix = float.Parse(liste[2]);

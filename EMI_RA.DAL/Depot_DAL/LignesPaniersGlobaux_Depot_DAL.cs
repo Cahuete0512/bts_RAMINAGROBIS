@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 
 
@@ -51,10 +48,10 @@ namespace EMI_RA.DAL
             while (reader.Read())
             {
                 var paniersGlobaux = new LignesPaniersGlobaux_DAL(reader.GetInt32(0),
-                                        reader.GetInt32(1),
-                                        reader.GetInt32(2),
-                                        reader.GetInt32(3),
-                                        reader.GetInt32(4));
+                                                                  reader.GetInt32(1),
+                                                                  reader.GetInt32(2),
+                                                                  reader.GetInt32(3),
+                                                                  reader.GetInt32(4));
 
                 listeDeLignesPaniersGlobaux.Add(paniersGlobaux);
             }
@@ -91,8 +88,6 @@ namespace EMI_RA.DAL
 
             return paniersGlobaux;
         }
-
-
         public List<LignesPaniersGlobaux_DAL> GetByPanierGlobauxID(int idPaniersGlobaux)
         {
             CreerConnexionEtCommande();
@@ -138,10 +133,10 @@ namespace EMI_RA.DAL
             while (reader.Read())
             {
                 LignesPaniersGlobaux_DAL lignesPaniersGlobaux = new LignesPaniersGlobaux_DAL(reader.GetInt32(0),
-                                                              reader.GetInt32(1),
-                                                              reader.GetInt32(2),
-                                                              reader.GetInt32(3),
-                                                              reader.GetInt32(4));
+                                                                                             reader.GetInt32(1),
+                                                                                             reader.GetInt32(2),
+                                                                                             reader.GetInt32(3),
+                                                                                             reader.GetInt32(4));
                 listeDeLignesPaniersGlobaux.Add(lignesPaniersGlobaux);
             }
 

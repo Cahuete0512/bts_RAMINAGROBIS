@@ -1,6 +1,4 @@
 ﻿using EMI_RA.DAL;
-using EMI_RA.DTO;
-using System;
 using System.Collections.Generic;
 
 namespace EMI_RA
@@ -16,7 +14,11 @@ namespace EMI_RA
             
             foreach (var p in depotProduits.GetAll())
             {
-                Produits produit = new Produits(p.ID, p.Libelle, p.Marque, p.Reference, p.Disponible);
+                Produits produit = new Produits(p.ID, 
+                                                p.Libelle, 
+                                                p.Marque, 
+                                                p.Reference, 
+                                                p.Disponible);
                 result.Add(produit);
             }
             return result;
@@ -25,7 +27,11 @@ namespace EMI_RA
         public Produits GetProduitsByID(int idProduits)
         {
             var p = depotProduits.GetByID(idProduits);
-            return new Produits(p.ID, p.Libelle, p.Marque, p.Reference, p.Disponible);
+            return new Produits(p.ID, 
+                                p.Libelle,
+                                p.Marque, 
+                                p.Reference, 
+                                p.Disponible);
         }
         public Produits Insert(Produits produit)
         {
@@ -34,13 +40,15 @@ namespace EMI_RA
 
             return produit;
         }
-
         public void Update(Produits produit)
         {
-            var produitDal = new Produits_DAL(produit.ID, produit.Libelle, produit.Marque, produit.Reference, produit.Disponible);
+            var produitDal = new Produits_DAL(produit.ID, 
+                                              produit.Libelle, 
+                                              produit.Marque, 
+                                              produit.Reference, 
+                                              produit.Disponible);
             depotProduits.Update(produitDal);
         }
-
         public void AssoProdFournisseurs(Produits produit, int idFournisseur)
         {
             var associations = new AssoProduitsFournisseurs_DAL((int)produit.ID, idFournisseur);
@@ -54,9 +62,11 @@ namespace EMI_RA
             {
                 return null;
             }
-            return new Produits(p.ID, p.Reference, p.Libelle, p.Marque);
+            return new Produits(p.ID, 
+                                p.Reference, 
+                                p.Libelle, 
+                                p.Marque);
         }
-
         public List<Produits> GetByIdFournisseur(int idFournisseurs)
         {
 
@@ -64,7 +74,11 @@ namespace EMI_RA
 
             foreach (var p in depotProduits.GetByIdFournisseur(idFournisseurs))
             {
-                Produits produit = new Produits(p.ID, p.Libelle, p.Marque, p.Reference, p.Disponible);
+                Produits produit = new Produits(p.ID, 
+                                                p.Libelle, 
+                                                p.Marque, 
+                                                p.Reference, 
+                                                p.Disponible);
                 result.Add(produit);
             }
             return result;

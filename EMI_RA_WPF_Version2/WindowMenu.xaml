@@ -13,7 +13,7 @@
         <StackPanel Margin="0,0,0,17">
             <StackPanel>
                 <Menu Height="24" Width="800">
-                    <MenuItem Header="Adérent" Height="20" Width="56">
+                    <MenuItem Header="Adhérents" Height="20" Width="69">
 
                         <MenuItem Header="Voir" HorizontalAlignment="Left" Height="20" Width="140" Click="MenuItemVoirAdherents_click"/>
                         <MenuItem Header="Ajouter" HorizontalAlignment="Left" Height="20" Width="140" Click="MenuItemAjouterAdherent_click" />
@@ -36,7 +36,7 @@
                 </Menu>
             </StackPanel>
            <!-- <TextBlock HorizontalAlignment="Left" Margin="332,163,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>-->
-            <Frame x:Name="Main" Height="348" />
+            <Frame x:Name="Main" Height="350" />
 
 
         </StackPanel>

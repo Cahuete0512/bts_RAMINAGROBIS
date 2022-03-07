@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace EMI_RA.DAL
 {

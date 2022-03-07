@@ -47,8 +47,6 @@ namespace EMI_RA.API.Controllers
         public void GenererListeAchatString(int IdAdherent, IEnumerable<string> csvFile)
         {
             paniersGlobauxService.genererListeAchatString(IdAdherent, csvFile);
-
-
         }
 
         [HttpPost]

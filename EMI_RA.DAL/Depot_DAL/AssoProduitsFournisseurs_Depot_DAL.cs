@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EMI_RA.DAL
 {
@@ -71,8 +68,6 @@ namespace EMI_RA.DAL
         public override AssoProduitsFournisseurs_DAL Update(AssoProduitsFournisseurs_DAL produits)
         {
             throw new NotImplementedException();
-
-
         }
         public List<AssoProduitsFournisseurs_DAL> GetByIdProduit(int idProduits)
         {

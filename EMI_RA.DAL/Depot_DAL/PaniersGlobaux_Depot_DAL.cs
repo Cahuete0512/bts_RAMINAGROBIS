@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EMI_RA.DAL
 {
@@ -28,9 +25,9 @@ namespace EMI_RA.DAL
             while (reader.Read())
             { 
                 var listeDePanierGlobal = new PaniersGlobaux_DAL(reader.GetInt32(0),
-                                                        reader.GetInt32(1),
-                                                        reader.GetInt32(2),
-                                                        reader.GetBoolean(3));
+                                                                 reader.GetInt32(1),
+                                                                 reader.GetInt32(2),
+                                                                 reader.GetBoolean(3));
 
 
                 listeDePaniersGlobaux.Add(listeDePanierGlobal);
@@ -159,9 +156,9 @@ namespace EMI_RA.DAL
             if (reader.Read())
             {
                 panierGlobal = new PaniersGlobaux_DAL(reader.GetInt32(0),
-                                        reader.GetInt32(1),
-                                        reader.GetInt32(2), 
-                                        reader.GetBoolean(3));
+                                                      reader.GetInt32(1),
+                                                      reader.GetInt32(2), 
+                                                      reader.GetBoolean(3));
             }
             DetruireConnexionEtCommande();
 

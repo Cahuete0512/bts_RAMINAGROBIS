@@ -21,7 +21,6 @@ namespace EMI_RA.API.Controllers
             service = srv;
         }
 
-        // GET: api/<ProduitsController>
         [HttpGet]
         public IEnumerable<AssoProduitsFournisseurs_DTO> GetAllProduits()
         {
@@ -36,9 +35,8 @@ namespace EMI_RA.API.Controllers
         public AssoProduitsFournisseurs_DTO Insert(AssoProduitsFournisseurs_DTO a)
         {
             var a_metier = service.Insert(new AssoProduitsFournisseurs(a.IdFournisseurs,
-                a.IdProduits));
-            //Je récupère l'ID
-            
+                                                                       a.IdProduits));
+           
             //je renvoie l'objet DTO
             return a;
         }
