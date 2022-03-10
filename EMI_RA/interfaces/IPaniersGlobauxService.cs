@@ -13,12 +13,12 @@ namespace EMI_RA
         public PaniersGlobaux Update(PaniersGlobaux p);
         public PaniersGlobaux UpdateCloture(PaniersGlobaux p);
         public void Delete(PaniersGlobaux p);
-        public PaniersGlobaux getPanierGlobal();
-        public Stream genererPanierStream(int annee, int semaine);
-        public Stream genererPanierStream(int annee, int semaine, int idFournisseur);
-        public void genererListeAchatString(int IdAdherent, IEnumerable<String> csvFile);
-        public List<String> genererPanierString(int annee, int semaine, int idFournisseur);
+        public PaniersGlobaux GetPanierGlobal();
+        public Stream GenererPanierStream(int annee, int semaine);
+        public Stream GenererPanierStream(int annee, int semaine, int idFournisseur);
+        public void GenererListeAchatString(int IdAdherent, IEnumerable<String> csvFile);
+        public List<String> GenererPanierString(int annee, int semaine, int idFournisseur);
         public void Cloturer(int pgId);
-        public void genererListeAchat(int IdAdherent, IFormFile csvFile);
+        public void GenererListeAchat(int IdAdherent, IFormFile csvFile);
     }
 }

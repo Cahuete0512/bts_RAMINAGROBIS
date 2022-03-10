@@ -11,6 +11,7 @@
 #pragma warning disable 1591 // Disable "CS1591 Missing XML comment for publicly visible type or member ..."
 #pragma warning disable 8073 // Disable "CS8073 The result of the expression is always 'false' since a value of type 'T' is never equal to 'null' of type 'T?'"
 #pragma warning disable 3016 // Disable "CS3016 Arrays as attribute arguments is not CLS-compliant"
+#pragma warning disable 8603 // Disable "CS8603 Possible null reference return"
 
 namespace EMI_RA.API.Client
 {
@@ -2273,6 +2274,8 @@ namespace EMI_RA.API.Client
         [Newtonsoft.Json.JsonProperty("dateAdhesion", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset DateAdhesion { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("actif", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Actif { get; set; }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.5.0 (NJsonSchema v10.6.6.0 (Newtonsoft.Json v11.0.0.0))")]
@@ -2298,7 +2301,18 @@ namespace EMI_RA.API.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.15.5.0 (NJsonSchema v10.6.6.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class Offres
     {
-        
+        [Newtonsoft.Json.JsonProperty("idOffres", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int IdOffres { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("idFournisseurs", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int IdFournisseurs { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("idPaniersGlobaux", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int IdPaniersGlobaux { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("idProduits", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int IdProduits { get; set; }
+
         [Newtonsoft.Json.JsonProperty("nomFournisseur", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string NomFournisseur { get; set; }
 
@@ -2309,6 +2323,9 @@ namespace EMI_RA.API.Client
 
         [Newtonsoft.Json.JsonProperty("prix", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public float Prix { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("gagne", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool Gagne { get; set; }
 
     }
 
@@ -2421,3 +2438,4 @@ namespace EMI_RA.API.Client
 #pragma warning restore 114
 #pragma warning restore 108
 #pragma warning restore 3016
+#pragma warning restore 8603

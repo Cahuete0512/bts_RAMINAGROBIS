@@ -18,7 +18,7 @@ namespace EMI_RA.API.Controllers
         {
             service = srv;
         }
-
+        #region GetAllFournisseurs
         [HttpGet]
         public IEnumerable<Fournisseurs> GetAllFournisseurs()
         {
@@ -30,21 +30,28 @@ namespace EMI_RA.API.Controllers
                 f.PrenomContact,
                 f.Email,
                 f.Adresse,
-                f.DateAdhesion));
+                f.DateAdhesion,
+                f.Actif));
         }
+        #endregion
 
+        #region AlimenterCatalogue
         [HttpPost("catalogue/{IdFournisseurs}")]
         public void AlimenterCatalogue(int IdFournisseurs, IFormFile csvFile)
         {
-            service.alimenterCatalogue(IdFournisseurs, csvFile);
+            service.AlimenterCatalogue(IdFournisseurs, csvFile);
         }
-
+        #endregion
+        //TODO : Regrouper les 2 méthodes
+        #region AlimenterCatalogueString
         [HttpPost("catalogueVersion2/{IdFournisseurs}")]
         public void AlimenterCatalogueString(int IdFournisseurs, List<string> csvFile)
         {
-            service.alimenterCatalogueVersion2(IdFournisseurs, csvFile);
+            service.AlimenterCatalogueVersion2(IdFournisseurs, csvFile);
         }
+        #endregion
 
+        #region InsertFournisseur
         [HttpPost]
         public Fournisseurs Insert(Fournisseurs f)
         {
@@ -52,7 +59,9 @@ namespace EMI_RA.API.Controllers
 
             return f_metier;
         }
+        #endregion
 
+        #region UpdateFournisseur
         [HttpPut]
         public Fournisseurs Update(Fournisseurs f)
         {
@@ -60,11 +69,24 @@ namespace EMI_RA.API.Controllers
 
             return f_metier;
         }
+        #endregion
 
-        [HttpDelete("{id}")]
-        public void Delete([FromRoute] int id)
+        #region DesactiverFournisseur
+        //TODO : active = false pour désactiver un fournisseur
+        [HttpPost("desactiver")]
+        public void Desactiver(int IdFournisseurs)
         {
-            service.Delete(new Fournisseurs(id));
+            service.Desactiver(IdFournisseurs);
         }
+        #endregion
+
+        #region DeleteFournisseur
+        //TO DO : On peut le delete sauf s'il a déjà a gagné un pannier
+        [HttpDelete("{id}")]
+        public void Delete([FromRoute] int IdFournisseurs)
+        {
+            service.Delete(new Fournisseurs(IdFournisseurs));
+        }
+        #endregion
     }
 }

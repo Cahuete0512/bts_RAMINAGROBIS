@@ -33,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AjouterAdhérent.xaml.cs">
+    <Compile Update="AjouterAdherentajouterAdherent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="AjouterFournisseurs.xaml.cs">
@@ -60,7 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="AjouterAdhérent.xaml">
+    <Page Update="AjouterAdherentajouterAdherent.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

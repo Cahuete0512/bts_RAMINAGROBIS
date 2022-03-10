@@ -40,7 +40,7 @@ namespace EMI_RA.API.Controllers
 
             String filename = "Panier_" + annee + "_S" + semaine + ".csv";
 
-            Stream stream = service.genererPanierStream(annee, semaine);
+            Stream stream = service.GenererPanierStream(annee, semaine);
 
             return new FileStreamResult(stream, "application/csv")
             {
@@ -56,7 +56,7 @@ namespace EMI_RA.API.Controllers
 
             String filename = "Panier_" + annee + "_S" + semaine + ".csv";
 
-            Stream stream = service.genererPanierStream(annee, semaine, idFournisseur);
+            Stream stream = service.GenererPanierStream(annee, semaine, idFournisseur);
 
             return new FileStreamResult(stream, "application/csv")
             {
@@ -71,7 +71,7 @@ namespace EMI_RA.API.Controllers
 
             String filename = "Panier_" + annee + "_S" + semaine + ".csv";
 
-            List<String> Panier = service.genererPanierString(annee, semaine, idFournisseur);
+            List<String> Panier = service.GenererPanierString(annee, semaine, idFournisseur);
             var commande_DTO = new Commande_DTO()
             {
                 FichierCsv = Panier

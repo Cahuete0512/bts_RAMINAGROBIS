@@ -69,7 +69,7 @@ namespace EMI_RA
                                                                               CalendarWeekRule.FirstFullWeek, 
                                                                               DayOfWeek.Monday);
 
-            return this.getGlobal(annee, semaine);
+            return this.GetGlobal(annee, semaine);
         }
 
         public PaniersGlobaux Update(PaniersGlobaux p)
@@ -101,16 +101,16 @@ namespace EMI_RA
                                                        p.Cloture); ;
             depot.Delete(panierGlobaux);
         }
-        public PaniersGlobaux getPanierGlobal()
+        public PaniersGlobaux GetPanierGlobal()
         {
             int annee = DateTime.Now.Year;
             int semaine = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now, 
                                                                               CalendarWeekRule.FirstFullWeek, 
                                                                               DayOfWeek.Monday);
 
-            return this.getGlobal(annee, semaine);
+            return this.GetGlobal(annee, semaine);
         }
-        public PaniersGlobaux getGlobal(int annee, int semaine)
+        public PaniersGlobaux GetGlobal(int annee, int semaine)
         {
             PaniersGlobaux_DAL paniersGlobauxDAL = depot.GetByYearAndWeek(annee, semaine);
 
@@ -121,11 +121,11 @@ namespace EMI_RA
             }
             return new PaniersGlobaux(paniersGlobauxDAL.IDPaniersGlobaux, paniersGlobauxDAL.NumeroSemaine, paniersGlobauxDAL.Annee, paniersGlobauxDAL.Cloture);
         }
-        public Stream genererPanierStream(int annee, int semaine)
+        public Stream GenererPanierStream(int annee, int semaine)
         {
             StringBuilder contentBuilder = new StringBuilder("reference;quantite;prix unitaire HT\n");
 
-            PaniersGlobaux paniersGlobaux = this.getGlobal(annee, semaine);
+            PaniersGlobaux paniersGlobaux = this.GetGlobal(annee, semaine);
             List<LignesPaniersGlobaux> lignesPaniersGlobaux = lignesPaniersGlobauxService.GetLignesPaniersGlobauxByPanierGlobauxID(paniersGlobaux.ID);
 
             List<LignesPaniersGlobaux> lignesAgregees = lignesPaniersGlobaux
@@ -150,11 +150,11 @@ namespace EMI_RA
             MemoryStream stream = new MemoryStream(bytes);
             return stream;
         }
-        public Stream genererPanierStream(int annee, int semaine, int idFournisseur)
+        public Stream GenererPanierStream(int annee, int semaine, int idFournisseur)
         {
             StringBuilder contentBuilder = new StringBuilder("reference;quantite;prix unitaire HT\n");
 
-            PaniersGlobaux paniersGlobaux = this.getGlobal(annee, semaine);
+            PaniersGlobaux paniersGlobaux = this.GetGlobal(annee, semaine);
             List<LignesPaniersGlobaux> lignesPaniersGlobaux = lignesPaniersGlobauxService.GetLignesPaniersGlobauxByPanierGlobauxIDAndFournisseurID(paniersGlobaux.ID, idFournisseur);
 
             List<LignesPaniersGlobaux> lignesAgregees = lignesPaniersGlobaux
@@ -179,11 +179,11 @@ namespace EMI_RA
             MemoryStream stream = new MemoryStream(bytes);
             return stream;
         }
-        public List<String> genererPanierString(int annee, int semaine, int idFournisseur)
+        public List<String> GenererPanierString(int annee, int semaine, int idFournisseur)
         {
             StringBuilder contentBuilder = new StringBuilder("reference;quantite;prix unitaire HT\n");
 
-            PaniersGlobaux paniersGlobaux = this.getGlobal(annee, semaine);
+            PaniersGlobaux paniersGlobaux = this.GetGlobal(annee, semaine);
             List<LignesPaniersGlobaux> lignesPaniersGlobaux = lignesPaniersGlobauxService.GetLignesPaniersGlobauxByPanierGlobauxIDAndFournisseurID(paniersGlobaux.ID, idFournisseur);
 
             List<LignesPaniersGlobaux> lignesAgregees = lignesPaniersGlobaux
@@ -240,7 +240,7 @@ namespace EMI_RA
                 throw new Exception($"Le panier avec identifié : {paniersGlobaux.ID} est déjà clôturé.");
             }
         }
-        public void genererListeAchat(int IdAdherent, IFormFile csvFile)
+        public void GenererListeAchat(int IdAdherent, IFormFile csvFile)
         {
 
             ProduitsServices produitsServices = new ProduitsServices();
@@ -250,7 +250,7 @@ namespace EMI_RA
             Calendar cal = dfi.Calendar;
 
             // récupération du panier global
-            PaniersGlobaux paniersGlobaux = this.getPanierGlobal();
+            PaniersGlobaux paniersGlobaux = this.GetPanierGlobal();
 
             using (StreamReader reader = new StreamReader(csvFile.OpenReadStream()))
             {
@@ -271,7 +271,7 @@ namespace EMI_RA
                 }
             }
         }
-        public void genererListeAchatString(int IdAdherent, IEnumerable<String> csvFile)
+        public void GenererListeAchatString(int IdAdherent, IEnumerable<String> csvFile)
         {
 
             ProduitsServices produitsServices = new ProduitsServices();
@@ -279,7 +279,7 @@ namespace EMI_RA
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
             DateTime date = DateTime.Now;
             Calendar cal = dfi.Calendar;
-            PaniersGlobaux paniersGlobaux = this.getPanierGlobal();
+            PaniersGlobaux paniersGlobaux = this.GetPanierGlobal();
 
             for (int i = 0; i < csvFile.Count();i++ )
             {

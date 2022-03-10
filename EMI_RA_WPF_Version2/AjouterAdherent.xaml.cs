@@ -19,9 +19,9 @@ using System.Windows.Shapes;
 namespace EMI_RA.WPF
 {
     /// <summary>
-    /// Logique d'interaction pour AjouterAdhérent.xaml
+    /// Logique d'interaction pour ajouterAdherent.xaml
     /// </summary>
-    public partial class AjouterAdhérent : Page
+    public partial class ajouterAdherent : Page
     {
         String Societe = "";
         String CiviliteContact = "";
@@ -30,7 +30,7 @@ namespace EMI_RA.WPF
         String Email = "";
         String Adresse = "";
 
-        public AjouterAdhérent()
+        public ajouterAdherent()
         {
             InitializeComponent();
             

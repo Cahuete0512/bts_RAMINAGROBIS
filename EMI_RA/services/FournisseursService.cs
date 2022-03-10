@@ -23,7 +23,8 @@ namespace EMI_RA
                                               f.PrenomContact,
                                               f.Email,
                                               f.Adresse,
-                                              f.DateAdhesion))
+                                              f.DateAdhesion,
+                                              f.Actif))
                 .ToList();
             
             return fournisseurs;
@@ -40,7 +41,8 @@ namespace EMI_RA
                                     f.PrenomContact,
                                     f.Email,
                                     f.Adresse,
-                                    f.DateAdhesion);
+                                    f.DateAdhesion,
+                                    f.Actif);
         }
         public Fournisseurs Insert(Fournisseurs f)
         {
@@ -51,7 +53,8 @@ namespace EMI_RA
                                                    f.PrenomContact,
                                                    f.Email,
                                                    f.Adresse,
-                                                   DateTime.Now);
+                                                   DateTime.Now,
+                                                   f.Actif);
             depot.Insert(fournisseur);
 
             f.IdFournisseurs = fournisseur.IdFournisseurs;
@@ -67,8 +70,43 @@ namespace EMI_RA
                                                    f.PrenomContact,
                                                    f.Email,
                                                    f.Adresse,
-                                                   f.DateAdhesion);
+                                                   f.DateAdhesion,
+                                                   f.Actif);
             depot.Update(fournisseur);
+
+            return f;
+        }
+        public void Desactiver(int idFournisseurs)
+        {
+            Fournisseurs fournisseurs = GetFournisseursByID(idFournisseurs);
+            if (fournisseurs.Actif == true)
+            {
+                List<Produits> listeProduits = produitsService.GetByIdFournisseur(idFournisseurs);
+
+                List<int> idProduits = listeProduits
+                    .Select(produit => produit.ID).Distinct()
+                    .ToList();
+
+
+                UpdateFournisseurDesactive(fournisseurs);
+            }
+            else if (fournisseurs.Actif == false)
+            {
+                throw new Exception($"Le fournisseur avec l'identifiant : {fournisseurs.IdFournisseurs} est déjà désactivé.");
+            }
+        }
+        public Fournisseurs UpdateFournisseurDesactive(Fournisseurs f)
+        {
+            var fournisseur = new Fournisseurs_DAL(f.IdFournisseurs,
+                                                   f.Societe,
+                                                   f.CiviliteContact,
+                                                   f.NomContact,
+                                                   f.PrenomContact,
+                                                   f.Email,
+                                                   f.Adresse,
+                                                   f.DateAdhesion,
+                                                   f.Actif);
+            depot.UpdateFournisseurDesactive(fournisseur);
 
             return f;
         }
@@ -81,12 +119,13 @@ namespace EMI_RA
                                                       f.PrenomContact,
                                                       f.Email,
                                                       f.Adresse,
-                                                      f.DateAdhesion);
+                                                      f.DateAdhesion,
+                                                      f.Actif);
             depot.Delete(fournisseur);
 
         }
-
-        public void alimenterCatalogue(int idFournisseurs, IFormFile csvFile)
+        //TO DO : voir pour additionner 2ème méthode qui est la même à celle-ci (juste paramètre qui est modifié, ajouter : IEnumerable<String> csvFile
+        public void AlimenterCatalogue(int idFournisseurs, IFormFile csvFile)
         {
             Fournisseurs fournisseurs = this.GetFournisseursByID(idFournisseurs);
 
@@ -94,7 +133,7 @@ namespace EMI_RA
             List<Produits> produitsExistantsListe = produitsService.GetByIdFournisseur(idFournisseurs);
 
             // récupérer les produits du fichier csv
-            List<Produits> produitsCsvListe = recupProduitsCsv(csvFile, idFournisseurs);
+            List<Produits> produitsCsvListe = RecupProduitsCsv(csvFile, idFournisseurs);
 
             // pour les produits du csv qui n'existent pas en BDD -> création du produit en BDD et de la liaison
             foreach (var produitCsv in produitsCsvListe)
@@ -150,7 +189,7 @@ namespace EMI_RA
                 }
             }
         }
-        public void alimenterCatalogueVersion2(int idFournisseurs, IEnumerable<String> csvFile)
+        public void AlimenterCatalogueVersion2(int idFournisseurs, IEnumerable<String> csvFile)
         {
             Fournisseurs fournisseurs = this.GetFournisseursByID(idFournisseurs);
 
@@ -158,7 +197,7 @@ namespace EMI_RA
             List<Produits> produitsExistantsListe = produitsService.GetByIdFournisseur(idFournisseurs);
 
             // récupérer les produits du fichier csv
-            List<Produits> produitsCsvListe = recupProduitsCsvString(csvFile, idFournisseurs);
+            List<Produits> produitsCsvListe = RecupProduitsCsvString(csvFile, idFournisseurs);
 
             // pour les produits du csv qui n'existent pas en BDD -> création du produit en BDD et de la liaison
             foreach (var produitCsv in produitsCsvListe)
@@ -217,7 +256,7 @@ namespace EMI_RA
                 }
             }
         }
-        private List<Produits> recupProduitsCsv(IFormFile csvFile, int idFournisseurs)
+        private List<Produits> RecupProduitsCsv(IFormFile csvFile, int idFournisseurs)
         {
             List<Produits> produitsListe = new List<Produits>();
             using (StreamReader reader = new StreamReader(csvFile.OpenReadStream()))
@@ -240,7 +279,7 @@ namespace EMI_RA
 
             return produitsListe;
         }
-        private List<Produits> recupProduitsCsvString(IEnumerable<String> csvFile, int idFournisseurs)
+        private List<Produits> RecupProduitsCsvString(IEnumerable<String> csvFile, int idFournisseurs)
         {
             List<Produits> produitsListe = new List<Produits>();
 

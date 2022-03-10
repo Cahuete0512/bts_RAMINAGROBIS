@@ -40,13 +40,13 @@ namespace EMI_RA.API.Controllers
         [HttpPost("commande")]
         public void GenererListeAchat(int IdAdherent, IFormFile csvFile)
         {
-            paniersGlobauxService.genererListeAchat(IdAdherent, csvFile);
+            paniersGlobauxService.GenererListeAchat(IdAdherent, csvFile);
         }
-
+        // récup les infos du CSV passé par le WPF
         [HttpPost("commandeVersion2")]
         public void GenererListeAchatString(int IdAdherent, IEnumerable<string> csvFile)
         {
-            paniersGlobauxService.genererListeAchatString(IdAdherent, csvFile);
+            paniersGlobauxService.GenererListeAchatString(IdAdherent, csvFile);
         }
 
         [HttpPost]

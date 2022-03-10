@@ -26,13 +26,13 @@ namespace EMI_RA.WPF
         }
         private void MenuItemAjouterAdherent_click(object sender, RoutedEventArgs e)
         {
-            if (GestionnaireDeFenetres.ajouterAdhérent == null)
+            if (GestionnaireDeFenetres.ajouterAdherent == null)
             {
-                GestionnaireDeFenetres.ajouterAdhérent = new AjouterAdhérent();
+                GestionnaireDeFenetres.ajouterAdherent = new ajouterAdherent();
             }
             //w.Show();
             // MessageBox.Show("hello");
-            Main.Navigate(GestionnaireDeFenetres.ajouterAdhérent);
+            Main.Navigate(GestionnaireDeFenetres.ajouterAdherent);
 
         }
         private void MenuItemModifierAdherent_click(object sender, RoutedEventArgs e)
@@ -176,7 +176,7 @@ namespace EMI_RA.WPF
                 {
                     MessageBox.Show("Ce panier est déjà clôturé");
                 }
-                else
+                else if (!paniers.Cloture)
                 {
                     var clientApi = new Client("https://localhost:5001/", new HttpClient());
                     var cloturerPanier = clientApi.CloturerAsync(paniers.Id);

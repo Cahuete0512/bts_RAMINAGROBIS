@@ -22,14 +22,11 @@ namespace EMI_RA.WPF
             prenom.Text = fournisseur.PrenomContact;
             email.Text = fournisseur.Email;
             adresse.Text = fournisseur.Adresse;
-
-
+            actif.IsChecked = fournisseur.Actif;
 
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            
             var clientApi = new Client("https://localhost:5001/", new HttpClient());
 
             var fournisseurDTO = new API.Client.Fournisseurs()
@@ -40,8 +37,8 @@ namespace EMI_RA.WPF
                 NomContact = nom.Text,
                 PrenomContact = prenom.Text,
                 Email = email.Text,
-                Adresse = adresse.Text
-
+                Adresse = adresse.Text,
+                Actif = actif.IsChecked,
             };
 
             var fournisseur = await clientApi.FournisseursPUTAsync(fournisseurDTO);
