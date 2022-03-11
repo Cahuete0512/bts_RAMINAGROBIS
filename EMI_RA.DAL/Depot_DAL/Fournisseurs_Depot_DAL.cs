@@ -88,7 +88,7 @@ namespace EMI_RA.DAL
             commande.Parameters.Add(new SqlParameter("@email", fournisseur.Email));
             commande.Parameters.Add(new SqlParameter("@adresse", fournisseur.Adresse));
             commande.Parameters.Add(new SqlParameter("@dateAdhesion", fournisseur.DateAdhesion));
-            commande.Parameters.Add(new SqlParameter("@desactiver", fournisseur.Actif));
+            commande.Parameters.Add(new SqlParameter("@actif", fournisseur.Actif));
 
             var ID = Convert.ToInt32((decimal)commande.ExecuteScalar());
 
@@ -112,7 +112,7 @@ namespace EMI_RA.DAL
             commande.Parameters.Add(new SqlParameter("@prenomContact", fournisseur.PrenomContact));
             commande.Parameters.Add(new SqlParameter("@email", fournisseur.Email));
             commande.Parameters.Add(new SqlParameter("@adresse", fournisseur.Adresse));
-            commande.Parameters.Add(new SqlParameter("@desactiver", fournisseur.Actif));
+            commande.Parameters.Add(new SqlParameter("@actif", fournisseur.Actif));
 
             var nombreDeLignesAffectees = (int)commande.ExecuteNonQuery();
 
