@@ -10,6 +10,7 @@ namespace EMI_RA
     public class AdherentsService : IAdherentsService
     {
         private Adherents_Depot_DAL depotAdherents = new Adherents_Depot_DAL();
+        #region GetAllAdherents
         public List<Adherents> GetAllAdherents()
         {
             var result = new List<Adherents>();
@@ -27,6 +28,9 @@ namespace EMI_RA
             }
             return result;
         }
+        #endregion
+
+        #region GetAdherentById
         public Adherents GetByID(int idAdherents)
         {
             var a = depotAdherents.GetByID(idAdherents);
@@ -39,6 +43,9 @@ namespace EMI_RA
                                  a.Email,
                                  a.Adresse);
         }
+        #endregion
+
+        #region InsertAdherent
         public Adherents Insert(Adherents a)
         {
             var adherents = new Adherents_DAL(a.ID,
@@ -54,6 +61,9 @@ namespace EMI_RA
 
             return a;
         }
+        #endregion
+
+        #region UpdateAdherent
         public Adherents Update(Adherents a)
         {
             var adherents = new Adherents_DAL(a.ID,
@@ -67,6 +77,9 @@ namespace EMI_RA
 
             return a;
         }
+        #endregion
+
+        #region DeleteAdherent
         public void Delete(Adherents a)
         {
             var adherentDAL = new Adherents_DAL(a.ID,
@@ -78,5 +91,6 @@ namespace EMI_RA
                                               a.Adresse);
             depotAdherents.Delete(adherentDAL);
         }
+        #endregion
     }
 }

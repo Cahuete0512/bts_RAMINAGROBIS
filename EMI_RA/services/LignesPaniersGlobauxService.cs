@@ -13,7 +13,7 @@ namespace EMI_RA
     public class LignesPaniersGlobauxService : ILignesPaniersGlobauxService
     {
         private LignesPaniersGlobaux_Depot_DAL depot = new LignesPaniersGlobaux_Depot_DAL();
-
+        #region GetAllLignesPaniersGlobaux
         public List<LignesPaniersGlobaux> GetAllLignesPaniersGlobaux()
         {
             var lignePanierGlobaux = depot.GetAll()
@@ -26,7 +26,9 @@ namespace EMI_RA
 
             return lignePanierGlobaux;
         }
+        #endregion
 
+        #region GetLignesPaniersGlobauxByPanierGlobauxID
         public List<LignesPaniersGlobaux> GetLignesPaniersGlobauxByPanierGlobauxID(int idPaniersGlobaux)
         {
             var liste = depot.GetByPanierGlobauxID(idPaniersGlobaux)
@@ -39,6 +41,9 @@ namespace EMI_RA
 
             return liste;
         }
+        #endregion
+
+        #region GetLignesPaniersGlobauxByPanierGlobauxIDAndFournisseurID
         public List<LignesPaniersGlobaux> GetLignesPaniersGlobauxByPanierGlobauxIDAndFournisseurID(int idPaniersGlobaux, int idFournisseurs)
         {
             var liste = depot.GetByPanierGlobauxIDAndFournisseurID(idPaniersGlobaux, idFournisseurs)
@@ -51,7 +56,9 @@ namespace EMI_RA
 
             return liste;
         }
+        #endregion
 
+        #region InsertLignesPaniersGlobaux
         public LignesPaniersGlobaux Insert(LignesPaniersGlobaux l)
         {
             var lignePaniersGlobaux = new LignesPaniersGlobaux_DAL(
@@ -64,5 +71,6 @@ namespace EMI_RA
 
             return l;
         }
+        #endregion
     }
 }

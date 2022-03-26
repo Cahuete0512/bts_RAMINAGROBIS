@@ -8,7 +8,7 @@ namespace EMI_RA
     {
         public List<Fournisseurs> GetAllFournisseurs();
         public void AlimenterCatalogue(int IdFournisseurs, IFormFile csvFile);
-        public void AlimenterCatalogueVersion2(int IdFournisseurs, IEnumerable<String> csvFile);
+        public void AlimenterCatalogueStringCSV(int IdFournisseurs, IEnumerable<String> csvFile);
         public Fournisseurs GetFournisseursByID(int IdFournisseurs);
         public Fournisseurs Insert(Fournisseurs f);
         public Fournisseurs Update(Fournisseurs f);

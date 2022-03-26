@@ -980,15 +980,15 @@ namespace EMI_RA.API.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual System.Threading.Tasks.Task CatalogueVersion2Async(int idFournisseurs, System.Collections.Generic.IEnumerable<string> body)
+        public virtual System.Threading.Tasks.Task CatalogueStringCSVAsync(int idFournisseurs, System.Collections.Generic.IEnumerable<string> body)
         {
-            return CatalogueVersion2Async(idFournisseurs, body, System.Threading.CancellationToken.None);
+            return CatalogueStringCSVAsync(idFournisseurs, body, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public virtual async System.Threading.Tasks.Task CatalogueVersion2Async(int idFournisseurs, System.Collections.Generic.IEnumerable<string> body, System.Threading.CancellationToken cancellationToken)
+        public virtual async System.Threading.Tasks.Task CatalogueStringCSVAsync(int idFournisseurs, System.Collections.Generic.IEnumerable<string> body, System.Threading.CancellationToken cancellationToken)
         {
             if (idFournisseurs == null)
                 throw new System.ArgumentNullException("idFournisseurs");

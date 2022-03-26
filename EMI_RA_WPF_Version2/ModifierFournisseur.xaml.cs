@@ -23,7 +23,6 @@ namespace EMI_RA.WPF
             email.Text = fournisseur.Email;
             adresse.Text = fournisseur.Adresse;
             actif.IsChecked = fournisseur.Actif;
-
         }
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +42,14 @@ namespace EMI_RA.WPF
 
             var fournisseur = await clientApi.FournisseursPUTAsync(fournisseurDTO);
             MessageBox.Show("Le fournisseur a été modifié");
+            if (actif.IsChecked == false)
+            {
+                MessageBox.Show("Le fournisseur a été désactivé");
+            }
+            else
+            {
+                MessageBox.Show("Le fournisseur est actif");
+            }
         }
     }
 }

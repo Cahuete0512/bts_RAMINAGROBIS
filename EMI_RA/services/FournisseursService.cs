@@ -13,6 +13,7 @@ namespace EMI_RA
         private ProduitsServices produitsService = new ProduitsServices();
         private AssoProduitsFournisseursServices assoProduitsFournisseursServices = new AssoProduitsFournisseursServices();
 
+        #region GetAllFournisseurs
         public List<Fournisseurs> GetAllFournisseurs()
         {
             var fournisseurs = depot.GetAll()
@@ -29,7 +30,9 @@ namespace EMI_RA
             
             return fournisseurs;
         }
+        #endregion
 
+        #region GetFournisseeursById
         public Fournisseurs GetFournisseursByID(int idFournisseurs)
         {
             var f = depot.GetByID(idFournisseurs);
@@ -44,6 +47,9 @@ namespace EMI_RA
                                     f.DateAdhesion,
                                     f.Actif);
         }
+        #endregion
+
+        #region Insert
         public Fournisseurs Insert(Fournisseurs f)
         {
             var fournisseur = new Fournisseurs_DAL(f.IdFournisseurs,
@@ -61,6 +67,9 @@ namespace EMI_RA
 
             return f;
         }
+        #endregion
+
+        #region Update
         public Fournisseurs Update(Fournisseurs f)
         {
             var fournisseur = new Fournisseurs_DAL(f.IdFournisseurs,
@@ -76,6 +85,9 @@ namespace EMI_RA
 
             return f;
         }
+        #endregion
+
+        #region Desactiver
         public void Desactiver(int idFournisseurs)
         {
             Fournisseurs fournisseurs = GetFournisseursByID(idFournisseurs);
@@ -95,6 +107,9 @@ namespace EMI_RA
                 throw new Exception($"Le fournisseur avec l'identifiant : {fournisseurs.IdFournisseurs} est déjà désactivé.");
             }
         }
+        #endregion
+
+        #region UpdateFournisseurDesactive
         public Fournisseurs UpdateFournisseurDesactive(Fournisseurs f)
         {
             var fournisseur = new Fournisseurs_DAL(f.IdFournisseurs,
@@ -110,6 +125,9 @@ namespace EMI_RA
 
             return f;
         }
+        #endregion
+
+        #region DeleteFournisseur
         public void Delete(Fournisseurs f)
         {
             var fournisseur = new Fournisseurs_DAL(f.IdFournisseurs,
@@ -124,6 +142,9 @@ namespace EMI_RA
             depot.Delete(fournisseur);
 
         }
+        #endregion
+
+        #region AliementerCatalogue
         //TO DO : voir pour additionner 2ème méthode qui est la même à celle-ci (juste paramètre qui est modifié, ajouter : IEnumerable<String> csvFile
         public void AlimenterCatalogue(int idFournisseurs, IFormFile csvFile)
         {
@@ -189,7 +210,10 @@ namespace EMI_RA
                 }
             }
         }
-        public void AlimenterCatalogueVersion2(int idFournisseurs, IEnumerable<String> csvFile)
+        #endregion
+
+        #region AlimenterCatalogueStringCSV
+        public void AlimenterCatalogueStringCSV(int idFournisseurs, IEnumerable<String> csvFile)
         {
             Fournisseurs fournisseurs = this.GetFournisseursByID(idFournisseurs);
 
@@ -256,6 +280,9 @@ namespace EMI_RA
                 }
             }
         }
+        #endregion
+
+        #region RecupProduitsCsv
         private List<Produits> RecupProduitsCsv(IFormFile csvFile, int idFournisseurs)
         {
             List<Produits> produitsListe = new List<Produits>();
@@ -279,6 +306,9 @@ namespace EMI_RA
 
             return produitsListe;
         }
+        #endregion 
+
+        #region RecupProduitsCsvString
         private List<Produits> RecupProduitsCsvString(IEnumerable<String> csvFile, int idFournisseurs)
         {
             List<Produits> produitsListe = new List<Produits>();
@@ -296,5 +326,6 @@ namespace EMI_RA
 
             return produitsListe;
         }
+        #endregion
     }
 }

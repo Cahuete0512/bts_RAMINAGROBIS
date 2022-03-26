@@ -44,10 +44,10 @@ namespace EMI_RA.API.Controllers
         #endregion
         //TODO : Regrouper les 2 méthodes
         #region AlimenterCatalogueString
-        [HttpPost("catalogueVersion2/{IdFournisseurs}")]
+        [HttpPost("catalogueStringCSV/{IdFournisseurs}")]
         public void AlimenterCatalogueString(int IdFournisseurs, List<string> csvFile)
         {
-            service.AlimenterCatalogueVersion2(IdFournisseurs, csvFile);
+            service.AlimenterCatalogueStringCSV(IdFournisseurs, csvFile);
         }
         #endregion
 
