@@ -17,6 +17,8 @@ namespace EMI_RA.DAL
 
         public int ID { get; set; }
 
+        public Produits_DAL produit { get; set; }
+
         public LignesPaniersGlobaux_DAL(int idProduits, int quantites, int idPaniersGlobaux, int idAdherents) => 
             (IDProduits, Quantite, IDPaniersGlobaux, IDAdherents) = (idProduits, quantites, idPaniersGlobaux, idAdherents);
 

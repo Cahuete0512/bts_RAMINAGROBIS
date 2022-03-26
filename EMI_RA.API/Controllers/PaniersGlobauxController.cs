@@ -48,6 +48,12 @@ namespace EMI_RA.API.Controllers
             };
         }
 
+        [HttpGet("panier/byIdPanier/{idPanier}")]
+        public PaniersGlobaux getPanierById([FromRoute] int idPanier)
+        {
+            return service.GetPaniersGlobauxByID(idPanier);
+        }
+
         [HttpGet("panier/{idFournisseur}")]
         public FileStreamResult getPanier([FromRoute] int idFournisseur)
         {

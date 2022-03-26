@@ -32,12 +32,42 @@ namespace EMI_RA
 
         public PaniersGlobaux GetPaniersGlobauxByID(int idPaniersGlobaux)
         {
-            var p = depot.GetByID(idPaniersGlobaux);
+            var panierDAL = depot.GetByID(idPaniersGlobaux);
 
-            return new PaniersGlobaux(p.IDPaniersGlobaux,
-                                      p.NumeroSemaine,
-                                      p.Annee,
-                                      p.Cloture);
+            var panier = new PaniersGlobaux(panierDAL.IDPaniersGlobaux,
+                                      panierDAL.NumeroSemaine,
+                                      panierDAL.Annee,
+                                      panierDAL.Cloture);
+
+            panier.lignesPaniersGlobauxList = new List<LignesPaniersGlobaux>();
+
+            foreach(var lignesPaniersGlobauxDAL in panierDAL.lignesPaniersGlobauxListe)
+            {
+                LignesPaniersGlobaux lignesPaniersGlobaux = new LignesPaniersGlobaux(lignesPaniersGlobauxDAL.ID,
+                                                                                      lignesPaniersGlobauxDAL.IDProduits,
+                                                                                      lignesPaniersGlobauxDAL.Quantite,
+                                                                                      lignesPaniersGlobauxDAL.IDPaniersGlobaux,
+                                                                                      lignesPaniersGlobauxDAL.IDAdherents);
+
+                panier.lignesPaniersGlobauxList.Add(lignesPaniersGlobaux);
+                lignesPaniersGlobaux.produit = new Produits(lignesPaniersGlobauxDAL.produit.ID,
+                                                            lignesPaniersGlobauxDAL.produit.Reference,
+                                                            lignesPaniersGlobauxDAL.produit.Libelle,
+                                                            lignesPaniersGlobauxDAL.produit.Marque);
+
+                var fournisseurListe = new List<Fournisseurs>();
+
+                foreach(var fournisseurDAL in lignesPaniersGlobauxDAL.produit.fournisseurListe)
+                {
+                    var fournisseur = new Fournisseurs(fournisseurDAL.IdFournisseurs, fournisseurDAL.Societe, fournisseurDAL.CiviliteContact, fournisseurDAL.NomContact, fournisseurDAL.PrenomContact, fournisseurDAL.Email, fournisseurDAL.Adresse);
+                    fournisseurListe.Add(fournisseur);
+                }
+
+                lignesPaniersGlobaux.produit.fournisseurListe = fournisseurListe;
+            }
+
+
+            return panier;
         }
 
         public PaniersGlobaux GetPaniersGlobauxByID(int annee, int semaine)

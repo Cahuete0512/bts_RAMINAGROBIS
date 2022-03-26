@@ -23,7 +23,7 @@ namespace EMI_RA.DAL
             var listeDePaniersGlobaux = new List<PaniersGlobaux_DAL>();
 
             while (reader.Read())
-            { 
+            {
                 var listeDePanierGlobal = new PaniersGlobaux_DAL(reader.GetInt32(0),
                                                                  reader.GetInt32(1),
                                                                  reader.GetInt32(2),
@@ -47,6 +47,7 @@ namespace EMI_RA.DAL
             var reader = commande.ExecuteReader();
 
             var listeDePaniersGlobaux = new List<PaniersGlobaux_DAL>();
+            var depotLignePaniersGlobaux = new LignesPaniersGlobaux_Depot_DAL();
 
             PaniersGlobaux_DAL panierGlobal;
             if (reader.Read())
@@ -55,6 +56,10 @@ namespace EMI_RA.DAL
                                         reader.GetInt32(1),
                                         reader.GetInt32(2),
                                         reader.GetBoolean(3));
+
+                var lignePanierGlobauxListe = depotLignePaniersGlobaux.GetByPanierGlobauxID(panierGlobal.IDPaniersGlobaux);
+
+                panierGlobal.lignesPaniersGlobauxListe = lignePanierGlobauxListe;
             }
             else
                 throw new Exception($"Pas de panier dans la BDD avec l'ID {idPaniersGlobaux}");

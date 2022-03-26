@@ -13,6 +13,7 @@ namespace EMI_RA
         public string Marque { get; set; }
         public string Reference { get; set; }
         public bool Disponible { get; set; }
+        public List<Fournisseurs> fournisseurListe { get; set; }
         public Produits(string libelle, string marque, string reference, bool disponible)
            => (Libelle, Marque, Reference, Disponible) = (libelle, marque, reference, disponible);
         public Produits(int idProduits, string libelle, string marque, string reference, bool disponible)

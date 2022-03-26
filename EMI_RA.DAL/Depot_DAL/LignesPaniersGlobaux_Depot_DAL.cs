@@ -96,6 +96,36 @@ namespace EMI_RA.DAL
             commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", idPaniersGlobaux));
             var reader = commande.ExecuteReader();
 
+            var produitDepot = new Produits_Depot_DAL();
+
+            var listeDeLignesPaniersGlobaux = new List<LignesPaniersGlobaux_DAL>();
+
+            while (reader.Read())
+            {
+                LignesPaniersGlobaux_DAL lignesPaniersGlobaux = new LignesPaniersGlobaux_DAL(reader.GetInt32(0),
+                                                              reader.GetInt32(1),
+                                                              reader.GetInt32(2),
+                                                              reader.GetInt32(3),
+                                                              reader.GetInt32(4));
+
+                Produits_DAL produits = produitDepot.GetByID(lignesPaniersGlobaux.IDProduits);
+                lignesPaniersGlobaux.produit = produits;
+
+                listeDeLignesPaniersGlobaux.Add(lignesPaniersGlobaux);
+            }
+
+            DetruireConnexionEtCommande();
+
+            return listeDeLignesPaniersGlobaux;
+        }
+        public List<LignesPaniersGlobaux_DAL> GetByPanierGlobauxIDWithRelations(int idPaniersGlobaux)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "select idLignesPaniersGlobaux, idProduits, quantite, idPaniersGlobaux, idAdherents from lignesPaniersGlobaux where idPaniersGlobaux=@idPaniersGlobaux";
+            commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", idPaniersGlobaux));
+            var reader = commande.ExecuteReader();
+
             var listeDeLignesPaniersGlobaux = new List<LignesPaniersGlobaux_DAL>();
 
             while (reader.Read())

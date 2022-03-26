@@ -46,19 +46,27 @@ namespace EMI_RA.DAL
             commande.Parameters.Add(new SqlParameter("@idProduits", ID));
             var reader = commande.ExecuteReader();
 
+            var depotFournisseur = new Fournisseurs_Depot_DAL();
+
             var listeDeProduits = new List<Produits_DAL>();
 
-            Produits_DAL produits;
+            Produits_DAL produit;
             if (reader.Read())
             {
-                produits = new Produits_DAL(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetBoolean(4));
+                produit = new Produits_DAL(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetBoolean(4));
+
+
+                var fournisseurs = depotFournisseur.GetByProduitID(produit.ID);
+
+                produit.fournisseurListe = fournisseurs;
+
             }
             else
                 throw new Exception($"Pas de produit dans la BDD avec l'ID {ID}");
 
             DetruireConnexionEtCommande();
 
-            return produits;
+            return produit;
         }
 
         public override Produits_DAL Insert(Produits_DAL produits)

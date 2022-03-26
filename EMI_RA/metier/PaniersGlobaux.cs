@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace EMI_RA
 {
@@ -8,6 +9,8 @@ namespace EMI_RA
         public int NumeroSemaine { get; set; }
         public int Annee { get; set; }
         public Boolean Cloture { get; set; }
+
+        public List<LignesPaniersGlobaux> lignesPaniersGlobauxList { get; set; } 
         public PaniersGlobaux(int numeroSemaine, int annee)
                     => (NumeroSemaine, Annee) = (numeroSemaine, annee);
         public PaniersGlobaux(int numeroSemaine, int annee, Boolean cloture)

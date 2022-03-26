@@ -43,6 +43,42 @@ namespace EMI_RA.DAL
             return listeDeFournisseurs;
         }
 
+        public List<Fournisseurs_DAL> GetByProduitID(int idProduit)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText =
+                "select f.idFournisseurs, f.societe, f.civiliteContact, f.nomContact, f.prenomContact, f.email, f.adresse, f.dateAdhesion, f.actif " +
+                "from fournisseurs f " +
+                "inner join assoProduitsFournisseurs apf on f.idFournisseurs = apf.idFournisseurs " +
+                "where apf.idProduits = @idProduit";
+            commande.Parameters.Add(new SqlParameter("@idProduit", idProduit));
+
+            var reader = commande.ExecuteReader();
+
+            var listeDeFournisseurs = new List<Fournisseurs_DAL>();
+
+            while (reader.Read())
+            {
+                //dans reader.GetInt32 on met la colonne que l'on souhaite récupérer ici 0 = idFournisseurs, 1 = societe...
+                var fournisseur = new Fournisseurs_DAL(reader.GetInt32(0),
+                                                        reader.GetString(1),
+                                                        reader.GetString(2),
+                                                        reader.GetString(3),
+                                                        reader.GetString(4),
+                                                        reader.GetString(5),
+                                                        reader.GetString(6),
+                                                        reader.GetDateTime(7),
+                                                        reader.GetBoolean(8));
+
+                listeDeFournisseurs.Add(fournisseur);
+            }
+
+            DetruireConnexionEtCommande();
+
+            return listeDeFournisseurs;
+        }
+
         public override Fournisseurs_DAL GetByID(int idFournisseurs)
         {
             CreerConnexionEtCommande();

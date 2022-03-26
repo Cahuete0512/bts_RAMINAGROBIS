@@ -17,6 +17,8 @@ namespace EMI_RA.DAL
         public List<AssoProduitsFournisseurs_DAL> ProduitsFournisseurs { get; set; }
         public bool Disponible { get; set; }
 
+        public List<Fournisseurs_DAL> fournisseurListe { get; set; }
+
         public Produits_DAL(int idProduits, string libelle, string marque, string reference, bool disponible)
             => (ID, Libelle, Marque, Reference, Disponible) = (idProduits, libelle, marque, reference, disponible);
 
