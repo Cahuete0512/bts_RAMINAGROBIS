@@ -86,6 +86,12 @@ namespace EMI_RA.API.Controllers
  
         }
 
+        [HttpPost("lancerEnchere")]
+        public void LancerEnchere(DateTime debutPeriode, DateTime finPeriode)
+        {
+            service.LancerEnchere(debutPeriode, finPeriode);
+        }
+
         [HttpPost("cloturer")]
         public void Cloturer(int pgId)
         {

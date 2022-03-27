@@ -37,7 +37,7 @@ namespace EMI_RA.WPF
                 PrenomContact = prenom.Text,
                 Email = email.Text,
                 Adresse = adresse.Text,
-                Actif = actif.IsChecked,
+                Actif = (bool)actif.IsChecked,
             };
 
             var fournisseur = await clientApi.FournisseursPUTAsync(fournisseurDTO);

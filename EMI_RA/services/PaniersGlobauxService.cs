@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
+using System.Text.Json;
 
 namespace EMI_RA
 {
@@ -35,9 +37,9 @@ namespace EMI_RA
             var panierDAL = depot.GetByID(idPaniersGlobaux);
 
             var panier = new PaniersGlobaux(panierDAL.IDPaniersGlobaux,
-                                      panierDAL.NumeroSemaine,
-                                      panierDAL.Annee,
-                                      panierDAL.Cloture);
+                                              panierDAL.NumeroSemaine,
+                                              panierDAL.Annee,
+                                              panierDAL.Cloture);
 
             panier.lignesPaniersGlobauxList = new List<LignesPaniersGlobaux>();
 
@@ -59,7 +61,13 @@ namespace EMI_RA
 
                 foreach(var fournisseurDAL in lignesPaniersGlobauxDAL.produit.fournisseurListe)
                 {
-                    var fournisseur = new Fournisseurs(fournisseurDAL.IdFournisseurs, fournisseurDAL.Societe, fournisseurDAL.CiviliteContact, fournisseurDAL.NomContact, fournisseurDAL.PrenomContact, fournisseurDAL.Email, fournisseurDAL.Adresse);
+                    var fournisseur = new Fournisseurs(fournisseurDAL.IdFournisseurs, 
+                                                       fournisseurDAL.Societe, 
+                                                       fournisseurDAL.CiviliteContact, 
+                                                       fournisseurDAL.NomContact, 
+                                                       fournisseurDAL.PrenomContact, 
+                                                       fournisseurDAL.Email, 
+                                                       fournisseurDAL.Adresse);
                     fournisseurListe.Add(fournisseur);
                 }
 
@@ -296,7 +304,10 @@ namespace EMI_RA
 
                     Produits produits = produitsServices.GetByRef(reference);
 
-                    var lignesPaniersGlobaux = new LignesPaniersGlobaux_DAL(produits.ID, Int32.Parse(quantite), paniersGlobaux.ID, IdAdherent);
+                    var lignesPaniersGlobaux = new LignesPaniersGlobaux_DAL(produits.ID, 
+                                                                            Int32.Parse(quantite), 
+                                                                            paniersGlobaux.ID, 
+                                                                            IdAdherent);
                     lignesPaniersGlobaux_depot.Insert(lignesPaniersGlobaux);
                 }
             }
@@ -321,6 +332,31 @@ namespace EMI_RA
 
                 var lignesPaniersGlobaux = new LignesPaniersGlobaux_DAL(produits.ID, Int32.Parse(quantite), paniersGlobaux.ID, IdAdherent);
                 lignesPaniersGlobaux_depot.Insert(lignesPaniersGlobaux);
+            }
+        }
+        public void LancerEnchere(DateTime debutPeriode, DateTime finPeriode)
+        {
+            var url = "http://127.0.0.1:8000/lancerEnchere";
+
+            var request = WebRequest.Create(url);
+            request.Method = "POST";
+
+            request.ContentType = "application/json";
+
+            var panier = GetPanierGlobal();
+
+            var data = "{\"IdPanier\": " + panier.ID + ", \"debutPeriode\": \""+ debutPeriode + "\", \"finPeriode\": \"" + finPeriode + "\" }";
+
+            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            {
+                streamWriter.Write(data);
+            }
+
+            var httpResponse = (HttpWebResponse)request.GetResponse();
+
+            if (httpResponse.StatusCode != HttpStatusCode.OK)
+            {
+                throw new Exception("La requête a échoué");
             }
         }
     }

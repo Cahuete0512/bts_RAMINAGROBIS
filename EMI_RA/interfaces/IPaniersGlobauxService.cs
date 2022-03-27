@@ -19,6 +19,7 @@ namespace EMI_RA
         public void GenererListeAchatString(int IdAdherent, IEnumerable<String> csvFile);
         public List<String> GenererPanierString(int annee, int semaine, int idFournisseur);
         public void Cloturer(int pgId);
+        public void LancerEnchere(DateTime debutPeriode, DateTime finPeriode);
         public void GenererListeAchat(int IdAdherent, IFormFile csvFile);
     }
 }

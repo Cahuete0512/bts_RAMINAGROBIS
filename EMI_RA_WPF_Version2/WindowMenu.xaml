@@ -31,8 +31,8 @@
                         <MenuItem Header="Voir" HorizontalAlignment="Left" Click="MenuItemVoirPanier_click"/>
                         <MenuItem Header="Cloturer le panier selectionné" HorizontalAlignment="Left" Click="MenuItemCloturerPanierSelectionne_click"/>
                         <MenuItem Header="Voir le panier selectionné" HorizontalAlignment="Left" Click="MenuItemVoirPanierSelectionne_click"/>
+                        <MenuItem Header="Lancer enchère" HorizontalAlignment="Left" Click="MenuItemLancerEnchereSelectionne_click"/>
                     </MenuItem>
-
                 </Menu>
             </StackPanel>
            <!-- <TextBlock HorizontalAlignment="Left" Margin="332,163,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top"/>-->

@@ -1,7 +1,7 @@
 ﻿using EMI_RA.API.Client;
+using EMI_RA_WPF;
 using System.Net.Http;
 using System.Windows;
-
 
 namespace EMI_RA.WPF
 {
@@ -160,7 +160,22 @@ namespace EMI_RA.WPF
                 Main.Navigate(GestionnaireDeFenetres.voirItemsPanier);
             }
         }
-        
+
+        private void MenuItemLancerEnchereSelectionne_click(object sender, RoutedEventArgs e)
+        {
+            //if (GestionnaireDeFenetres.LancerEnchere == null)
+            //{
+            //    MessageBox.Show("Veuillez selectionner une date");
+            //}
+            //else
+            //{
+                GestionnaireDeFenetres.LancerEnchere = new LancerEnchere();
+
+                Main.Navigate(GestionnaireDeFenetres.LancerEnchere);
+
+            //}
+
+        }
         private void MenuItemCloturerPanierSelectionne_click(object sender, RoutedEventArgs e)
         {
 

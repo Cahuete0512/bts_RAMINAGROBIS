@@ -18,6 +18,8 @@ namespace EMI_RA.WPF
         public static Catalogue? Catalogue { get; set; }
         public static VoirItemsPanier? voirItemsPanier { get; set; }
         public static PageParDefault? PageParDefault { get; set; }
+        public static LancerEnchere? LancerEnchere { get; set; }
+
 
     }
 }
