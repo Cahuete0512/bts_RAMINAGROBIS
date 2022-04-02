@@ -7,7 +7,7 @@ namespace EMI_RA
     public class OffresService : IOffresService
     {
         private Offres_Depot_DAL depot = new Offres_Depot_DAL();
-
+        #region GetAllOffres
         public List<Offres> GetAllOffres()
         {
             var offre = depot.GetAll()
@@ -22,7 +22,8 @@ namespace EMI_RA
 
             return offre;
         }
-
+        #endregion
+        #region GetOffreByIDFournisseur
         public Offres GetOffreByIDFournisseur(int idFournisseur)
         {
             var offre = depot.GetByIDFournisseur(idFournisseur);
@@ -36,7 +37,8 @@ namespace EMI_RA
                                             offre.Gagne);
 
         }
-
+        #endregion
+        #region GetOffreByIDPaniers
         public List<Offres> GetOffreByIDPaniers(int idPaniersGlobaux)
         {
             var offre = depot.GetByIDPaniers(idPaniersGlobaux)
@@ -52,7 +54,8 @@ namespace EMI_RA
             return offre;
 
         }
-
+        #endregion
+        #region Insert
         public Offres Insert(Offres offres)
         {
             var offre = new Offres_DAL(offres.IdFournisseurs,
@@ -65,6 +68,8 @@ namespace EMI_RA
 
             return offres;
         }
+        #endregion
+        #region Update
         public void Update(Offres offres)
         {
             var offre = new Offres_DAL(offres.IdOffres,
@@ -76,7 +81,8 @@ namespace EMI_RA
                                         offres.Gagne);
             depot.Update(offre);
         }
-
+        #endregion
+        #region GetMeilleursOffres
         public List<Offres> GetMeilleursOffres(int idPaniersGlobaux)
         {
             var offre = depot.GetGagneByIDPaniers(idPaniersGlobaux)
@@ -88,5 +94,6 @@ namespace EMI_RA
 
             return offre;
         }
+        #endregion
     }
 }

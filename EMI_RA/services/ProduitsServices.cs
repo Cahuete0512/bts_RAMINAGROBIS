@@ -8,6 +8,7 @@ namespace EMI_RA
         private Produits_Depot_DAL depotProduits = new Produits_Depot_DAL();
         private AssoProduitsFournisseurs_Depot_DAL depotAsso = new AssoProduitsFournisseurs_Depot_DAL();
 
+        #region GetAll
         public List<Produits> GetAll()
         {
             var result = new List<Produits>();
@@ -23,7 +24,8 @@ namespace EMI_RA
             }
             return result;
         }
-       
+        #endregion
+        #region GetProduitsByID
         public Produits GetProduitsByID(int idProduits)
         {
             var p = depotProduits.GetByID(idProduits);
@@ -33,6 +35,8 @@ namespace EMI_RA
                                 p.Reference, 
                                 p.Disponible);
         }
+        #endregion
+        #region Insert
         public Produits Insert(Produits produit)
         {
             var produitDal = new Produits_DAL(produit.Libelle, produit.Marque, produit.Reference, produit.Disponible);
@@ -40,6 +44,8 @@ namespace EMI_RA
 
             return produit;
         }
+        #endregion
+        #region Update
         public void Update(Produits produit)
         {
             var produitDal = new Produits_DAL(produit.ID, 
@@ -49,12 +55,15 @@ namespace EMI_RA
                                               produit.Disponible);
             depotProduits.Update(produitDal);
         }
+        #endregion
+        #region AssoProdFournisseurs
         public void AssoProdFournisseurs(Produits produit, int idFournisseur)
         {
             var associations = new AssoProduitsFournisseurs_DAL((int)produit.ID, idFournisseur);
             depotAsso.Insert(associations);
         }
-
+        #endregion
+        #region GetByRef
         public Produits GetByRef(string reference)
         {
             var p = depotProduits.GetByRef(reference);
@@ -67,6 +76,8 @@ namespace EMI_RA
                                 p.Libelle, 
                                 p.Marque);
         }
+        #endregion
+        #region GetByIdFournisseur
         public List<Produits> GetByIdFournisseur(int idFournisseurs)
         {
 
@@ -83,5 +94,7 @@ namespace EMI_RA
             }
             return result;
         }
+        #endregion
     }
 }
+
