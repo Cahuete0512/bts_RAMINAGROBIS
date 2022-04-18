@@ -145,7 +145,7 @@ namespace EMI_RA
         #endregion
 
         #region AliementerCatalogue
-        //TO DO : voir pour additionner 2ème méthode qui est la même à celle-ci (juste paramètre qui est modifié, ajouter : IEnumerable<String> csvFile
+        // TODO : voir pour additionner 2ème méthode qui est la même à celle-ci (juste paramètre qui est modifié, ajouter : IEnumerable<String> csvFile
         public void AlimenterCatalogue(int idFournisseurs, IFormFile csvFile)
         {
             Fournisseurs fournisseurs = this.GetFournisseursByID(idFournisseurs);

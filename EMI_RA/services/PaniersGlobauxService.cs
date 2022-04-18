@@ -373,7 +373,7 @@ namespace EMI_RA
 
             var panier = GetPanierGlobal();
 
-            var data = "{\"IdPanier\": " + panier.ID + ", \"debutPeriode\": \""+ debutPeriode + "\", \"finPeriode\": \"" + finPeriode + "\" }";
+            var data = "{\"idPanier\": " + panier.ID + ", \"debutPeriode\": \""+ debutPeriode + "\", \"finPeriode\": \"" + finPeriode + "\" }";
 
             using (var streamWriter = new StreamWriter(request.GetRequestStream()))
             {

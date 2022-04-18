@@ -21,10 +21,13 @@ namespace EMI_RA_WPF
         {
             var periodeDebut = OuvertureEnchere.SelectedDates[0];
             var periodeFin = OuvertureEnchere.SelectedDates[OuvertureEnchere.SelectedDates.Count-1];
-
-            if(OuvertureEnchere.SelectedDates.Count == 7) { 
+           
+            //var date = dateTime.Date.ToString("dd-MM-yyyy");
+            //TODO : demander pour calendar datetime?
+            if (OuvertureEnchere.SelectedDates.Count <= 7 /* && OuvertureEnchere.SelectedDates >= date*/) { 
             var clientapi = new Client("https://localhost:5001/", new HttpClient());
-            await clientapi.LancerEnchereAsync(periodeDebut, periodeFin);
+                
+                await clientapi.LancerEnchereAsync(periodeDebut, periodeFin);
             MessageBox.Show($"la période d'enchère est validée, le mail est envoyé");
             }
             else
@@ -38,8 +41,8 @@ namespace EMI_RA_WPF
 
             if (calendar.SelectedDate.HasValue)
             {
-                DateTime date = calendar.SelectedDate.Value;
-                this.Title = date.ToShortDateString();
+                SelectedDateTextBox.Text = calendar.SelectedDate.ToString();
+              
             }
         }
     }
