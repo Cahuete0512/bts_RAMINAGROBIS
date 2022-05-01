@@ -19,6 +19,7 @@ namespace EMI_RA.API.Controllers
         private ProduitsServices produitsServices = new ProduitsServices();
         private PaniersGlobauxService paniersGlobauxService = new PaniersGlobauxService();
         private OffresService offresService = new OffresService();
+        private FournisseursService fournisseursService = new FournisseursService();
 
         public OffresController(IOffresService srv)
         {
@@ -81,8 +82,17 @@ namespace EMI_RA.API.Controllers
                     Offres offre = new Offres(IdFournisseurs, paniersGlobaux.ID, produits.ID, quantite, prix);
                     offresService.Insert(offre);
                 }
-            
+
             }
+        }
+
+
+        [HttpPost("clientEnchere/{societe}")]
+        public void insertFromClient(string societe, IEnumerable<String> csvfile)
+        {
+
+            var fournisseur = fournisseursService.GetFournisseursBySociete(societe);
+            insertString(fournisseur.IdFournisseurs, csvfile);
         }
     }
 }

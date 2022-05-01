@@ -49,6 +49,23 @@ namespace EMI_RA
         }
         #endregion
 
+        #region GetFournisseeursBySociete
+        public Fournisseurs GetFournisseursBySociete(string societe)
+        {
+            var f = depot.GetBySociete(societe);
+
+            return new Fournisseurs(f.IdFournisseurs,
+                                    f.Societe,
+                                    f.CiviliteContact,
+                                    f.NomContact,
+                                    f.PrenomContact,
+                                    f.Email,
+                                    f.Adresse,
+                                    f.DateAdhesion,
+                                    f.Actif);
+        }
+        #endregion
+
         #region Insert
         public Fournisseurs Insert(Fournisseurs f)
         {

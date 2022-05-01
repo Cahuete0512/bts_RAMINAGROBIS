@@ -26,8 +26,9 @@ namespace EMI_RA_WPF
             //TODO : demander pour calendar datetime?
             if (OuvertureEnchere.SelectedDates.Count <= 7 /* && OuvertureEnchere.SelectedDates >= date*/) { 
             var clientapi = new Client("https://localhost:5001/", new HttpClient());
-                
-                await clientapi.LancerEnchereAsync(periodeDebut, periodeFin);
+
+            await clientapi.LancerEnchereAsync(periodeDebut, periodeFin);
+
             MessageBox.Show($"la période d'enchère est validée, le mail est envoyé");
             }
             else

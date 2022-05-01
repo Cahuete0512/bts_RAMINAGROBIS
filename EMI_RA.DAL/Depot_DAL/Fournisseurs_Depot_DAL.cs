@@ -111,6 +111,38 @@ namespace EMI_RA.DAL
             return fournisseur;
         }
 
+        public Fournisseurs_DAL GetBySociete(string societe)
+        {
+            CreerConnexionEtCommande();
+
+            commande.CommandText = "select idFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion, actif from fournisseurs where societe = @societe";
+            commande.Parameters.Add(new SqlParameter("@societe", societe));
+            var reader = commande.ExecuteReader();
+
+            var listeDeFournisseurs = new List<Fournisseurs_DAL>();
+
+            Fournisseurs_DAL fournisseur;
+            if (reader.Read())
+            {
+                fournisseur = new Fournisseurs_DAL(reader.GetInt32(0),
+                                        reader.GetString(1),
+                                        reader.GetString(2),
+                                        reader.GetString(3),
+                                        reader.GetString(4),
+                                        reader.GetString(5),
+                                        reader.GetString(6),
+                                        reader.GetDateTime(7),
+                                        reader.GetBoolean(8)
+                                        );
+            }
+            else
+                throw new Exception($"Pas de fournisseur dans la BDD avec la societe {societe}");
+
+            DetruireConnexionEtCommande();
+
+            return fournisseur;
+        }
+
         public override Fournisseurs_DAL Insert(Fournisseurs_DAL fournisseur)
         {
             CreerConnexionEtCommande();
