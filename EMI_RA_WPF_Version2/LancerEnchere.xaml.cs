@@ -1,5 +1,6 @@
 ﻿using EMI_RA.API.Client;
 using System;
+using System.Globalization;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,29 +17,42 @@ namespace EMI_RA_WPF
         {
             InitializeComponent();
         }
-
+        #region Button_Click
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var periodeDebut = OuvertureEnchere.SelectedDates[0];
-            var periodeFin = OuvertureEnchere.SelectedDates[OuvertureEnchere.SelectedDates.Count-1];
-           
-            //var date = dateTime.Date.ToString("dd-MM-yyyy");
-            //TODO : demander pour calendar datetime?
-            if (OuvertureEnchere.SelectedDates.Count <= 7 /* && OuvertureEnchere.SelectedDates >= date*/) { 
-            var clientapi = new Client("https://localhost:5001/", new HttpClient());
+            DateTime periodeDebut = OuvertureEnchere.SelectedDates[0];
+            DateTime periodeFin = OuvertureEnchere.SelectedDates[OuvertureEnchere.SelectedDates.Count-1];
+            int jourDeSemaineFin = (int)periodeFin.DayOfWeek;
 
-            await clientapi.LancerEnchereAsync(periodeDebut, periodeFin);
+            DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
+            System.Globalization.Calendar cal = dfi.Calendar;
 
-            MessageBox.Show($"la période d'enchère est validée, le mail est envoyé");
+            int weekOfYearDebut = cal.GetWeekOfYear(periodeDebut, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+            /*int weekOfYearFin = cal.GetWeekOfYear(periodeFin, dfi.CalendarWeekRule, dfi.FirstDayOfWeek + 6);*/
+            int weekOfYearNow = cal.GetWeekOfYear(DateTime.Now, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
+
+            if (OuvertureEnchere.SelectedDates.Count <= 7 
+                && jourDeSemaineFin.CompareTo(periodeFin.DayOfWeek) >= 0 
+                && periodeDebut >= DateTime.Now
+                && weekOfYearDebut == weekOfYearNow)
+            {
+                var clientapi = new Client("https://localhost:5001/", new HttpClient());
+
+                await clientapi.LancerEnchereAsync(periodeDebut, periodeFin);
+
+                MessageBox.Show($"la période d'enchère est validée, le mail est envoyé");
             }
             else
             {
                 MessageBox.Show($"la période d'enchère est non-valide, vous devez sélectionner sept jours");
             }
         }
+        #endregion
+
+        #region Calendar_SelectedDatesChanged
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            var calendar = sender as Calendar;
+            var calendar = sender as System.Windows.Controls.Calendar;
 
             if (calendar.SelectedDate.HasValue)
             {
@@ -46,5 +60,6 @@ namespace EMI_RA_WPF
               
             }
         }
+        #endregion
     }
 }

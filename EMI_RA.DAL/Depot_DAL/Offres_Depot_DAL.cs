@@ -38,7 +38,10 @@ namespace EMI_RA.DAL
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idOffres, idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne from offres";
+            commande.CommandText = "select idOffres, fournisseurs.idFournisseurs, fournisseurs.nomContact, idPaniersGlobaux, libelle, produits.idProduits, quantite, prix, gagne from offres " +
+                                    "join produits on offres.idProduits = produits.idProduits " +
+                                    "join fournisseurs on offres.idFournisseurs = fournisseurs.idFournisseurs " +
+                                    "where gagne = 1";
             //pour lire les lignes une par une
             var reader = commande.ExecuteReader();
 
@@ -47,7 +50,7 @@ namespace EMI_RA.DAL
             while (reader.Read())
             {
                 //dans reader.GetInt32 on met la colonne que l'on souhaite récupérer ici 0 = ID, 1 = Societe...
-                var offre = new Offres_DAL(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetFloat(5), reader.GetBoolean(6));
+                var offre = new Offres_DAL(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetInt32(3), reader.GetString(4), reader.GetInt32(5), reader.GetInt32(6), reader.GetFloat(7), reader.GetBoolean(8));
 
                 listeDOffres.Add(offre);
             }
@@ -138,7 +141,10 @@ namespace EMI_RA.DAL
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select societe, libelle, quantite, prix from offres join produits on offres.idProduits = produits.idProduits join fournisseurs on offres.idFournisseurs = fournisseurs.idFournisseurs where idPaniersGlobaux = @idPaniersGlobaux and gagne = 1";
+            commande.CommandText = "select societe, libelle, quantite, prix from offres " +
+                                    "join produits on offres.idProduits = produits.idProduits " +
+                                    "join fournisseurs on offres.idFournisseurs = fournisseurs.idFournisseurs " +
+                                    "where idPaniersGlobaux = @idPaniersGlobaux and gagne = 1";
             commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", idPaniersGlobaux));
             var reader = commande.ExecuteReader();
 

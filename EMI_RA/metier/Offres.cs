@@ -22,6 +22,8 @@ namespace EMI_RA
                     => (IdFournisseurs, IdPaniersGlobaux, IdProduits, Quantite, Prix) = (idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix);
         public Offres(int idOffres, int idFournisseurs, int idPaniersGlobaux, int idProduits, int quantite, float prix, Boolean gagne)
                     => (IdOffres, IdFournisseurs, IdPaniersGlobaux, IdProduits, Quantite, Prix, Gagne) = (idOffres, idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne);
+        public Offres(int idOffres, int idFournisseurs, string nomFournisseur, int idPaniersGlobaux, string nomProduit, int idProduits, int quantite, float prix, Boolean gagne)
+                   => (IdOffres, IdFournisseurs, NomFournisseur, IdPaniersGlobaux, NomProduit, IdProduits, Quantite, Prix, Gagne) = (idOffres, idFournisseurs, nomFournisseur, idPaniersGlobaux, nomProduit, idProduits, quantite, prix, gagne);
         public Offres(string nomFournisseur, string nomProduit, int quantite, float prix)
                     => (NomFournisseur, NomProduit, Quantite, Prix) = (nomFournisseur, nomProduit, quantite, prix);
     }
