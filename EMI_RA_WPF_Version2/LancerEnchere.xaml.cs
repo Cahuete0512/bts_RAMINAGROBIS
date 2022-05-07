@@ -25,6 +25,7 @@ namespace EMI_RA_WPF
 
             int jourDeSemaineDebut = (int)periodeDebut.DayOfWeek;
             int jourDeSemaineFin = (int)periodeFin.DayOfWeek;
+            periodeFin = periodeFin.AddDays(1);
 
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
             System.Globalization.Calendar cal = dfi.Calendar;
@@ -32,9 +33,7 @@ namespace EMI_RA_WPF
             int weekOfYearDebut = cal.GetWeekOfYear(periodeDebut, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
             int weekOfYearNow = cal.GetWeekOfYear(DateTime.Now, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
 
-            periodeFin = periodeFin.AddDays(1);
-
-            if ((periodeFin - periodeDebut).TotalDays <= 6
+            if ((periodeFin - periodeDebut).TotalDays <= 7
                 && jourDeSemaineFin >= jourDeSemaineDebut
                 && periodeDebut.Date >= DateTime.Now.Date
                 && weekOfYearDebut == weekOfYearNow
@@ -60,8 +59,8 @@ namespace EMI_RA_WPF
 
             if (calendar.SelectedDate.HasValue)
             {
-                SelectedDateTextBox.Text = calendar.SelectedDate.ToString();
-              
+                DateTime date = calendar.SelectedDate.Value;
+                this.Title = date.ToShortDateString();
             }
         }
         #endregion

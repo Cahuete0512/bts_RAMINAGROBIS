@@ -14,8 +14,6 @@
             <Calendar x:Name="OuvertureEnchere" SelectionMode = "SingleRange" 
              IsTodayHighlighted = "true" DisplayDate = "1/1/2022" SelectedDatesChanged = "Calendar_SelectedDatesChanged" Height="172"/>
         </StackPanel>
-        <TextBox x:Name="SelectedDateTextBox" Width="200" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="312,0,0,175"  RenderTransformOrigin="0.506,2.44">
-        </TextBox>
         <TextBlock HorizontalAlignment="Left" Margin="234,32,0,0" TextWrapping="Wrap" 
                    Text="Selectionnez la période d'enchere" VerticalAlignment="Top"
                    FontSize="24"/>
