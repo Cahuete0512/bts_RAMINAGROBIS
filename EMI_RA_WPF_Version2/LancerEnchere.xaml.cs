@@ -22,19 +22,23 @@ namespace EMI_RA_WPF
         {
             DateTime periodeDebut = OuvertureEnchere.SelectedDates[0];
             DateTime periodeFin = OuvertureEnchere.SelectedDates[OuvertureEnchere.SelectedDates.Count-1];
+
+            int jourDeSemaineDebut = (int)periodeDebut.DayOfWeek;
             int jourDeSemaineFin = (int)periodeFin.DayOfWeek;
 
             DateTimeFormatInfo dfi = DateTimeFormatInfo.CurrentInfo;
             System.Globalization.Calendar cal = dfi.Calendar;
 
             int weekOfYearDebut = cal.GetWeekOfYear(periodeDebut, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
-            /*int weekOfYearFin = cal.GetWeekOfYear(periodeFin, dfi.CalendarWeekRule, dfi.FirstDayOfWeek + 6);*/
             int weekOfYearNow = cal.GetWeekOfYear(DateTime.Now, dfi.CalendarWeekRule, dfi.FirstDayOfWeek);
 
-            if (OuvertureEnchere.SelectedDates.Count <= 7 
-                && jourDeSemaineFin.CompareTo(periodeFin.DayOfWeek) >= 0 
-                && periodeDebut >= DateTime.Now
-                && weekOfYearDebut == weekOfYearNow)
+            periodeFin = periodeFin.AddDays(1);
+
+            if ((periodeFin - periodeDebut).TotalDays <= 6
+                && jourDeSemaineFin >= jourDeSemaineDebut
+                && periodeDebut.Date >= DateTime.Now.Date
+                && weekOfYearDebut == weekOfYearNow
+                && jourDeSemaineFin != 0)
             {
                 var clientapi = new Client("https://localhost:5001/", new HttpClient());
 
@@ -44,7 +48,7 @@ namespace EMI_RA_WPF
             }
             else
             {
-                MessageBox.Show($"la période d'enchère est non-valide, vous devez sélectionner sept jours");
+                MessageBox.Show($"la période d'enchère est non-valide, vous devez sélectionner six jours maximum");
             }
         }
         #endregion
