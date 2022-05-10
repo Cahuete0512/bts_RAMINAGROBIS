@@ -17,16 +17,20 @@ namespace EMI_RA.API.Controllers
             service = srv;
         }
 
+        #region Get
         [HttpGet]
         public IEnumerable<Produits> Get()
         {
             return service.GetAll();
         }
+        #endregion
 
+        #region GetProduitsById
         [HttpGet("{id}")]
         public Produits GetProduitsById(int id)
         {
             return service.GetProduitsByID(id);
         }
+        #endregion
     }
 }

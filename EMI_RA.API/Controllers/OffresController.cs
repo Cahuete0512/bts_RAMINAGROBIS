@@ -26,18 +26,23 @@ namespace EMI_RA.API.Controllers
             service = srv;
         }
 
+        #region Get
         [HttpGet]
         public IEnumerable<Offres> Get()
         {
             return service.GetAllOffres();
         }
+        #endregion
 
+        #region GetMeilleursOffres
         [HttpGet("offre/meilleursPrix")]
         public List<Offres> GetMeilleursOffres(int IdPanier)
         {
             return service.GetMeilleursOffres(IdPanier);
         }
+        #endregion
 
+        #region insert
         [HttpPost("{IdFournisseurs}")]
         public void insert(int IdFournisseurs, IFormFile csvfile)
         {
@@ -64,6 +69,9 @@ namespace EMI_RA.API.Controllers
                 }
             }
         }
+        #endregion
+
+        #region insertString
         [HttpPost("version2{IdFournisseurs}")]
         public void insertString(int IdFournisseurs, IEnumerable<String> csvfile)
         {
@@ -85,8 +93,9 @@ namespace EMI_RA.API.Controllers
 
             }
         }
+        #endregion
 
-
+        #region insertFromClient
         [HttpPost("clientEnchere/{societe}")]
         public void insertFromClient(string societe, IEnumerable<String> csvfile)
         {
@@ -94,5 +103,6 @@ namespace EMI_RA.API.Controllers
             var fournisseur = fournisseursService.GetFournisseursBySociete(societe);
             insertString(fournisseur.IdFournisseurs, csvfile);
         }
+        #endregion
     }
 }

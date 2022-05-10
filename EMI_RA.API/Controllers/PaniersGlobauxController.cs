@@ -21,6 +21,7 @@ namespace EMI_RA.API.Controllers
             service = srv;
         }
 
+        #region GetAllPaniersGlobaux
         [HttpGet]
         public IEnumerable<PaniersGlobaux> GetAllPaniersGlobaux()
         {
@@ -31,7 +32,9 @@ namespace EMI_RA.API.Controllers
                 p.Cloture
             ));
         }
+        #endregion
 
+        #region getPanier
         [HttpGet("panier")]
         public FileStreamResult getPanier()
         {
@@ -47,13 +50,17 @@ namespace EMI_RA.API.Controllers
                 FileDownloadName = filename
             };
         }
+        #endregion
 
+        #region getPanierById
         [HttpGet("panier/byIdPanier/{idPanier}")]
         public PaniersGlobaux getPanierById([FromRoute] int idPanier)
         {
             return service.GetPaniersGlobauxByID(idPanier);
         }
+        #endregion
 
+        #region getPanier
         [HttpGet("panier/{idFournisseur}")]
         public FileStreamResult getPanier([FromRoute] int idFournisseur)
         {
@@ -69,6 +76,9 @@ namespace EMI_RA.API.Controllers
                 FileDownloadName = filename
             };
         }
+        #endregion
+
+        #region getPanierVersionTest
         [HttpGet("panier/Version test {idFournisseur}")]
         public List<String> getPanierVersionTest([FromRoute] int idFournisseur)
         {
@@ -85,17 +95,22 @@ namespace EMI_RA.API.Controllers
             return Panier;
  
         }
+        #endregion
 
+        #region LancerEnchere
         [HttpPost("lancerEnchere")]
         public void LancerEnchere(DateTime debutPeriode, DateTime finPeriode)
         {
             service.LancerEnchere(debutPeriode, finPeriode);
         }
+        #endregion
 
+        #region Cloturer
         [HttpPost("cloturer")]
         public void Cloturer(int pgId)
         {
              service.Cloturer(pgId);
         }
+        #endregion
     }
 }

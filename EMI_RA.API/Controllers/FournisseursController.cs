@@ -13,11 +13,13 @@ namespace EMI_RA.API.Controllers
     public class FournisseursController : Controller
     {
         private IFournisseursService service;
-
+        #region FournisseursController
         public FournisseursController(IFournisseursService srv)
         {
             service = srv;
         }
+        #endregion
+
         #region GetAllFournisseurs
         [HttpGet]
         public IEnumerable<Fournisseurs> GetAllFournisseurs()
@@ -42,7 +44,7 @@ namespace EMI_RA.API.Controllers
             service.AlimenterCatalogue(IdFournisseurs, csvFile);
         }
         #endregion
-        //TODO : Regrouper les 2 méthodes
+        
         #region AlimenterCatalogueString
         [HttpPost("catalogueStringCSV/{IdFournisseurs}")]
         public void AlimenterCatalogueString(int IdFournisseurs, List<string> csvFile)
@@ -72,7 +74,6 @@ namespace EMI_RA.API.Controllers
         #endregion
 
         #region DesactiverFournisseur
-        //TODO : active = false pour désactiver un fournisseur
         [HttpPost("desactiver")]
         public void Desactiver(int IdFournisseurs)
         {
@@ -81,7 +82,6 @@ namespace EMI_RA.API.Controllers
         #endregion
 
         #region DeleteFournisseur
-        //TO DO : On peut le delete sauf s'il a déjà a gagné un pannier
         [HttpDelete("{id}")]
         public void Delete([FromRoute] int IdFournisseurs)
         {

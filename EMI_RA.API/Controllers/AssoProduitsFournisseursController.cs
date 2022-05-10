@@ -21,6 +21,7 @@ namespace EMI_RA.API.Controllers
             service = srv;
         }
 
+        #region GetAllProduits
         [HttpGet]
         public IEnumerable<AssoProduitsFournisseurs_DTO> GetAllProduits()
         {
@@ -30,7 +31,9 @@ namespace EMI_RA.API.Controllers
                 IdProduits = a.IdProduits
             });
         }
+        #endregion
 
+        #region Insert
         [HttpPost]
         public AssoProduitsFournisseurs_DTO Insert(AssoProduitsFournisseurs_DTO a)
         {
@@ -40,7 +43,7 @@ namespace EMI_RA.API.Controllers
             //je renvoie l'objet DTO
             return a;
         }
+        #endregion
 
-       
     }
 }
