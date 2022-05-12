@@ -25,12 +25,16 @@ namespace EMI_RA_WPF
     public partial class Catalogue : Page
     {
         Fournisseurs fournisseur;
+
+        #region Catalogue
         public Catalogue(EMI_RA.API.Client.Fournisseurs unfournisseur)
         {
             InitializeComponent();
             fournisseur = unfournisseur;
         }
+        #endregion
 
+        #region Button_Click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog opfd = new OpenFileDialog();
@@ -47,7 +51,7 @@ namespace EMI_RA_WPF
             }
             var clientApi = new Client("https://localhost:5001/", new HttpClient());
             var commande = clientApi.CatalogueStringCSVAsync(fournisseur.IdFournisseurs, fichier);
-
         }
+        #endregion
     }
 }

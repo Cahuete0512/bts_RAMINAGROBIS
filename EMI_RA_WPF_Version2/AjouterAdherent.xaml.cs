@@ -18,10 +18,14 @@ namespace EMI_RA.WPF
         String Email = "";
         String Adresse = "";
 
+        #region ajouterAdherent
         public ajouterAdherent()
         {
             InitializeComponent();
         }
+        #endregion
+
+        #region Button_Click
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             Societe = societe.Text;
@@ -47,5 +51,6 @@ namespace EMI_RA.WPF
             var adherent = await clientApi.AdherentsPOSTAsync(adherentDTO);
             MessageBox.Show("L'adhérent a été enregistré");
         }
+        #endregion
     }
 }

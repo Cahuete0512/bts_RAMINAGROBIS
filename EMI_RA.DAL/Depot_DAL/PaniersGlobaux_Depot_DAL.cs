@@ -12,11 +12,13 @@ namespace EMI_RA.DAL
 
         }
 
+        #region GetAll
         public override List<PaniersGlobaux_DAL> GetAll()
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idPaniersGlobaux, numeroSemaine, annee, cloture from paniersGlobaux";
+            commande.CommandText = "select idPaniersGlobaux, numeroSemaine, annee, cloture " +
+                                   "from paniersGlobaux";
             //pour lire les lignes une par une
             var reader = commande.ExecuteReader();
 
@@ -29,7 +31,6 @@ namespace EMI_RA.DAL
                                                                  reader.GetInt32(2),
                                                                  reader.GetBoolean(3));
 
-
                 listeDePaniersGlobaux.Add(listeDePanierGlobal);
             }
 
@@ -37,12 +38,15 @@ namespace EMI_RA.DAL
 
             return listeDePaniersGlobaux;
         }
+        #endregion
 
+        #region GetByID
         public override PaniersGlobaux_DAL GetByID(int idPaniersGlobaux)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idPaniersGlobaux, numeroSemaine, annee, cloture from paniersGlobaux where idPaniersGlobaux = @idPaniersGlobaux ";
+            commande.CommandText = "select idPaniersGlobaux, numeroSemaine, annee, cloture from paniersGlobaux " +
+                                   "where idPaniersGlobaux = @idPaniersGlobaux ";
             commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", idPaniersGlobaux));
             var reader = commande.ExecuteReader();
 
@@ -53,9 +57,9 @@ namespace EMI_RA.DAL
             if (reader.Read())
             {
                 panierGlobal = new PaniersGlobaux_DAL(reader.GetInt32(0),
-                                        reader.GetInt32(1),
-                                        reader.GetInt32(2),
-                                        reader.GetBoolean(3));
+                                                      reader.GetInt32(1),
+                                                      reader.GetInt32(2),
+                                                      reader.GetBoolean(3));
 
                 var lignePanierGlobauxListe = depotLignePaniersGlobaux.GetByPanierGlobauxID(panierGlobal.IDPaniersGlobaux);
 
@@ -68,13 +72,15 @@ namespace EMI_RA.DAL
 
             return panierGlobal;
         }
+        #endregion
 
+        #region Insert
         public override PaniersGlobaux_DAL Insert(PaniersGlobaux_DAL panierGlobal)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "insert into paniersGlobaux (numeroSemaine, annee, cloture)"
-                                    + " values (@numeroSemaine, @annee, 0); select scope_identity()";
+            commande.CommandText = "insert into paniersGlobaux (numeroSemaine, annee, cloture)"+ 
+                                   "values (@numeroSemaine, @annee, 0); select scope_identity()";
             commande.Parameters.Add(new SqlParameter("@numeroSemaine", panierGlobal.NumeroSemaine));
             commande.Parameters.Add(new SqlParameter("@annee", panierGlobal.Annee));
    
@@ -87,7 +93,9 @@ namespace EMI_RA.DAL
 
             return panierGlobal;
         }
+        #endregion
 
+        #region Update
         public override PaniersGlobaux_DAL Update(PaniersGlobaux_DAL panierGlobal)
         {
             CreerConnexionEtCommande();
@@ -109,13 +117,15 @@ namespace EMI_RA.DAL
 
             return panierGlobal;
         }
+        #endregion
 
+        #region UpdateCloture
         public PaniersGlobaux_DAL UpdateCloture(PaniersGlobaux_DAL panierGlobal)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "update paniersGlobaux set cloture='true'"
-                                    + " where idPaniersGlobaux=@idPaniersGlobaux";
+            commande.CommandText = "update paniersGlobaux set cloture='true'"+ 
+                                   "where idPaniersGlobaux=@idPaniersGlobaux";
             commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", panierGlobal.IDPaniersGlobaux));
 
             var nombreDeLignesAffectees = (int)commande.ExecuteNonQuery();
@@ -129,12 +139,15 @@ namespace EMI_RA.DAL
 
             return panierGlobal;
         }
+        #endregion
 
+        #region Delete
         public override void Delete(PaniersGlobaux_DAL panierGlobal)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "delete from paniersGlobaux where idpaniersGlobaux = @idpaniersGlobaux";
+            commande.CommandText = "delete from paniersGlobaux " +
+                                   "where idpaniersGlobaux = @idpaniersGlobaux";
             commande.Parameters.Add(new SqlParameter("@idpaniersGlobaux", panierGlobal.IDPaniersGlobaux));
             var nombreDeLignesAffectees = (int)commande.ExecuteNonQuery();
 
@@ -145,12 +158,15 @@ namespace EMI_RA.DAL
 
             DetruireConnexionEtCommande();
         }
+        #endregion
 
+        #region GetByYearAndWeek
         public PaniersGlobaux_DAL GetByYearAndWeek(int annee, int semaine)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idPaniersGlobaux, numeroSemaine, annee, cloture from paniersGlobaux where annee = @annee and numeroSemaine = @semaine";
+            commande.CommandText = "select idPaniersGlobaux, numeroSemaine, annee, cloture from paniersGlobaux " +
+                                   "where annee = @annee and numeroSemaine = @semaine";
             commande.Parameters.Add(new SqlParameter("@annee", annee));
             commande.Parameters.Add(new SqlParameter("@semaine", semaine));
             var reader = commande.ExecuteReader();
@@ -169,6 +185,6 @@ namespace EMI_RA.DAL
 
             return panierGlobal;
         }
-
+        #endregion
     }
 }

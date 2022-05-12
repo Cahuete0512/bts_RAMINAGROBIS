@@ -14,7 +14,6 @@ namespace EMI_RA.DAL
         public int NumeroSemaine { get; set; }
         public int Annee { get; set; }
         public Boolean Cloture { get; set; }
-
         public List<LignesPaniersGlobaux_DAL> lignesPaniersGlobauxListe { get; set; }
 
         public PaniersGlobaux_DAL(int numeroSemaine, int annee)

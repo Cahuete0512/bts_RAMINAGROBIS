@@ -11,12 +11,13 @@ namespace EMI_RA.DAL
         {
 
         }
-
+        #region GetAll
         public override List<Fournisseurs_DAL> GetAll()
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion, actif from fournisseurs";
+            commande.CommandText = "select idFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion, actif " +
+                                    "from fournisseurs";
             //pour lire les lignes une par une
             var reader = commande.ExecuteReader();
 
@@ -26,14 +27,14 @@ namespace EMI_RA.DAL
             {
                 //dans reader.GetInt32 on met la colonne que l'on souhaite récupérer ici 0 = idFournisseurs, 1 = societe...
                 var fournisseur = new Fournisseurs_DAL(reader.GetInt32(0), 
-                                                        reader.GetString(1), 
-                                                        reader.GetString(2), 
-                                                        reader.GetString(3), 
-                                                        reader.GetString(4), 
-                                                        reader.GetString(5),
-                                                        reader.GetString(6),
-                                                        reader.GetDateTime(7),
-                                                        reader.GetBoolean(8));
+                                                       reader.GetString(1), 
+                                                       reader.GetString(2), 
+                                                       reader.GetString(3), 
+                                                       reader.GetString(4), 
+                                                       reader.GetString(5),
+                                                       reader.GetString(6),
+                                                       reader.GetDateTime(7),
+                                                       reader.GetBoolean(8));
 
                 listeDeFournisseurs.Add(fournisseur);
             }
@@ -42,7 +43,9 @@ namespace EMI_RA.DAL
 
             return listeDeFournisseurs;
         }
+        #endregion
 
+        #region GetByProduitID
         public List<Fournisseurs_DAL> GetByProduitID(int idProduit)
         {
             CreerConnexionEtCommande();
@@ -62,14 +65,14 @@ namespace EMI_RA.DAL
             {
                 //dans reader.GetInt32 on met la colonne que l'on souhaite récupérer ici 0 = idFournisseurs, 1 = societe...
                 var fournisseur = new Fournisseurs_DAL(reader.GetInt32(0),
-                                                        reader.GetString(1),
-                                                        reader.GetString(2),
-                                                        reader.GetString(3),
-                                                        reader.GetString(4),
-                                                        reader.GetString(5),
-                                                        reader.GetString(6),
-                                                        reader.GetDateTime(7),
-                                                        reader.GetBoolean(8));
+                                                       reader.GetString(1),
+                                                       reader.GetString(2),
+                                                       reader.GetString(3),
+                                                       reader.GetString(4),
+                                                       reader.GetString(5),
+                                                       reader.GetString(6),
+                                                       reader.GetDateTime(7),
+                                                       reader.GetBoolean(8));
 
                 listeDeFournisseurs.Add(fournisseur);
             }
@@ -78,12 +81,16 @@ namespace EMI_RA.DAL
 
             return listeDeFournisseurs;
         }
+        #endregion
 
+        #region GetByID
         public override Fournisseurs_DAL GetByID(int idFournisseurs)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion, actif from fournisseurs where idFournisseurs = @idFournisseurs";
+            commande.CommandText = "select idFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion, actif " +
+                                    "from fournisseurs " +
+                                    "where idFournisseurs = @idFournisseurs";
             commande.Parameters.Add(new SqlParameter("@idFournisseurs", idFournisseurs));
             var reader = commande.ExecuteReader();
 
@@ -93,15 +100,14 @@ namespace EMI_RA.DAL
             if (reader.Read())
             {
                 fournisseur = new Fournisseurs_DAL(reader.GetInt32(0),
-                                        reader.GetString(1),
-                                        reader.GetString(2),
-                                        reader.GetString(3),
-                                        reader.GetString(4),
-                                        reader.GetString(5),
-                                        reader.GetString(6),
-                                        reader.GetDateTime(7),
-                                        reader.GetBoolean(8)
-                                        );
+                                                   reader.GetString(1),
+                                                   reader.GetString(2),
+                                                   reader.GetString(3),
+                                                   reader.GetString(4),
+                                                   reader.GetString(5),
+                                                   reader.GetString(6),
+                                                   reader.GetDateTime(7),
+                                                   reader.GetBoolean(8));
             }
             else
                 throw new Exception($"Pas de fournisseur dans la BDD avec l'ID {idFournisseurs}");
@@ -110,12 +116,16 @@ namespace EMI_RA.DAL
 
             return fournisseur;
         }
+        #endregion
 
+        #region GetBySociete
         public Fournisseurs_DAL GetBySociete(string societe)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion, actif from fournisseurs where societe = @societe";
+            commande.CommandText = "select idFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion, actif " +
+                                    "from fournisseurs " +
+                                    "where societe = @societe";
             commande.Parameters.Add(new SqlParameter("@societe", societe));
             var reader = commande.ExecuteReader();
 
@@ -125,15 +135,14 @@ namespace EMI_RA.DAL
             if (reader.Read())
             {
                 fournisseur = new Fournisseurs_DAL(reader.GetInt32(0),
-                                        reader.GetString(1),
-                                        reader.GetString(2),
-                                        reader.GetString(3),
-                                        reader.GetString(4),
-                                        reader.GetString(5),
-                                        reader.GetString(6),
-                                        reader.GetDateTime(7),
-                                        reader.GetBoolean(8)
-                                        );
+                                                   reader.GetString(1),
+                                                   reader.GetString(2),
+                                                   reader.GetString(3),
+                                                   reader.GetString(4),
+                                                   reader.GetString(5),
+                                                   reader.GetString(6),
+                                                   reader.GetDateTime(7),
+                                                   reader.GetBoolean(8));
             }
             else
                 throw new Exception($"Pas de fournisseur dans la BDD avec la societe {societe}");
@@ -142,7 +151,9 @@ namespace EMI_RA.DAL
 
             return fournisseur;
         }
+        #endregion
 
+        #region Insert
         public override Fournisseurs_DAL Insert(Fournisseurs_DAL fournisseur)
         {
             CreerConnexionEtCommande();
@@ -166,7 +177,9 @@ namespace EMI_RA.DAL
 
             return fournisseur;
         }
+        #endregion
 
+        #region Update
         public override Fournisseurs_DAL Update(Fournisseurs_DAL fournisseur)
         {
             CreerConnexionEtCommande();
@@ -193,7 +206,10 @@ namespace EMI_RA.DAL
 
             return fournisseur;
         }
-        public  Fournisseurs_DAL UpdateDelete(Fournisseurs_DAL fournisseur)
+        #endregion
+
+        #region UpdateDelete
+        public Fournisseurs_DAL UpdateDelete(Fournisseurs_DAL fournisseur)
         {
             CreerConnexionEtCommande();
 
@@ -218,12 +234,15 @@ namespace EMI_RA.DAL
 
             return fournisseur;
         }
+        #endregion
+
+        #region UpdateFournisseurDesactive
         public Fournisseurs_DAL UpdateFournisseurDesactive(Fournisseurs_DAL fournisseur)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "update fournisseurs set actif=0"
-                                    + " where idFournisseurs=@idFournisseurs";
+            commande.CommandText = "update fournisseurs set actif=0"+ 
+                                    "where idFournisseurs=@idFournisseurs";
             commande.Parameters.Add(new SqlParameter("@idFournisseurs", fournisseur.IdFournisseurs));
 
             var nombreDeLignesAffectees = (int)commande.ExecuteNonQuery();
@@ -237,12 +256,15 @@ namespace EMI_RA.DAL
 
             return fournisseur;
         }
+        #endregion
 
+        #region Delete
         public override void Delete(Fournisseurs_DAL fournisseur)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "delete from fournisseurs where idFournisseurs = @idFournisseurs";
+            commande.CommandText = "delete from fournisseurs " +
+                                    "where idFournisseurs = @idFournisseurs";
             commande.Parameters.Add(new SqlParameter("@idFournisseurs", fournisseur.IdFournisseurs));
             var nombreDeLignesAffectees = (int)commande.ExecuteNonQuery();
 
@@ -253,5 +275,6 @@ namespace EMI_RA.DAL
 
             DetruireConnexionEtCommande();
         }
+        #endregion
     }
 }

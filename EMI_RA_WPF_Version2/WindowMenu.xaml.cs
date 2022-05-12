@@ -10,12 +10,16 @@ namespace EMI_RA.WPF
     /// </summary>
     public partial class WindowMenu : Window
     {
+        #region WindowMenu
         public WindowMenu()
         {
             InitializeComponent();
             GestionnaireDeFenetres.PageParDefault = new EMI_RA_WPF.PageParDefault();
             Main.Content = GestionnaireDeFenetres.PageParDefault;
         }
+        #endregion
+
+        #region MenuItemVoirAdherents_click
         private void MenuItemVoirAdherents_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Adherents == null)
@@ -24,17 +28,22 @@ namespace EMI_RA.WPF
             }
             Main.Navigate(GestionnaireDeFenetres.Adherents);
         }
+        #endregion
+
+        #region MenuItemAjouterAdherent_click
         private void MenuItemAjouterAdherent_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.ajouterAdherent == null)
             {
                 GestionnaireDeFenetres.ajouterAdherent = new ajouterAdherent();
             }
-            //w.Show();
-            // MessageBox.Show("hello");
+
             Main.Navigate(GestionnaireDeFenetres.ajouterAdherent);
 
         }
+        #endregion
+
+        #region MenuItemModifierAdherent_click
         private void MenuItemModifierAdherent_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Adherents == null || GestionnaireDeFenetres.Adherents.liste.SelectedItem == null)
@@ -51,16 +60,21 @@ namespace EMI_RA.WPF
                 Main.Navigate(GestionnaireDeFenetres.modifierAdherent);
             }
         }
+        #endregion
+
+        #region  MenuItemVoirFournisseurs_click
         private void MenuItemVoirFournisseurs_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseurs == null)
             {
                 GestionnaireDeFenetres.Fournisseurs = new Fournisseurs();
             }
-            //w.Show();
-            // MessageBox.Show("hello");
+
             Main.Navigate(GestionnaireDeFenetres.Fournisseurs);
         }
+        #endregion
+
+        #region MenuItemAjouterFournisseurs_click
         private void MenuItemAjouterFournisseurs_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.AjouterFournisseurs == null)
@@ -70,6 +84,9 @@ namespace EMI_RA.WPF
 
             Main.Navigate(GestionnaireDeFenetres.AjouterFournisseurs);
         }
+        #endregion
+
+        #region MenuItemModifierFournisseurs_click
         private void MenuItemModifierFournisseurs_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseurs == null || GestionnaireDeFenetres.Fournisseurs.liste.SelectedItem == null)
@@ -86,6 +103,9 @@ namespace EMI_RA.WPF
                 Main.Navigate(GestionnaireDeFenetres.modifierFournisseur);
             }
         }
+        #endregion
+
+        #region MenuItemVoirPanier_click
         private void MenuItemVoirPanier_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Panier == null)
@@ -95,6 +115,9 @@ namespace EMI_RA.WPF
             Main.Navigate(GestionnaireDeFenetres.Panier);
 
         }
+        #endregion
+
+        #region MenuItemModifierCommande_click
         private void MenuItemModifierCommande_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Adherents == null || GestionnaireDeFenetres.Adherents.liste.SelectedItem == null)
@@ -111,7 +134,9 @@ namespace EMI_RA.WPF
                 Main.Navigate(GestionnaireDeFenetres.Commande);
             }
         }
-        
+        #endregion
+
+        #region MenuItemEnregistrerPrix_click
         private void MenuItemEnregistrerPrix_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseurs == null || GestionnaireDeFenetres.Fournisseurs.liste.SelectedItem == null)
@@ -128,6 +153,9 @@ namespace EMI_RA.WPF
                 Main.Navigate(GestionnaireDeFenetres.EnregistrerPrixFournisseurs);
             }
         }
+        #endregion
+
+        #region MenuItemCatalogue_click
         private void MenuItemCatalogue_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseurs == null || GestionnaireDeFenetres.Fournisseurs.liste.SelectedItem == null)
@@ -144,6 +172,9 @@ namespace EMI_RA.WPF
                 Main.Navigate(GestionnaireDeFenetres.Catalogue);
             }
         }
+        #endregion
+
+        #region MenuItemVoirPanierSelectionne_click
         private void MenuItemVoirPanierSelectionne_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Panier == null || GestionnaireDeFenetres.Panier.liste.SelectedItem == null)
@@ -160,22 +191,26 @@ namespace EMI_RA.WPF
                 Main.Navigate(GestionnaireDeFenetres.voirItemsPanier);
             }
         }
+        #endregion
 
+        #region MenuItemLancerEnchereSelectionne_click
         private void MenuItemLancerEnchereSelectionne_click(object sender, RoutedEventArgs e)
         {
-            //if (GestionnaireDeFenetres.LancerEnchere == null)
-            //{
-            //    MessageBox.Show("Veuillez selectionner une date");
-            //}
-            //else
-            //{
+            if (GestionnaireDeFenetres.LancerEnchere == null)
+            {
+                MessageBox.Show("Veuillez selectionner une date");
+            }
+            else
+            {
                 GestionnaireDeFenetres.LancerEnchere = new LancerEnchere();
 
                 Main.Navigate(GestionnaireDeFenetres.LancerEnchere);
 
-            //}
-
+            }
         }
+        #endregion
+
+        #region MenuItemCloturerPanierSelectionne_click
         private void MenuItemCloturerPanierSelectionne_click(object sender, RoutedEventArgs e)
         {
 
@@ -200,5 +235,6 @@ namespace EMI_RA.WPF
                 }
             }
         }
+        #endregion
     }
 }

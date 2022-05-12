@@ -25,11 +25,16 @@ namespace EMI_RA_WPF
     public partial class EnregistrerPrixFournisseurs : Page
     {
         Fournisseurs fournisseur;
+
+        #region EnregistrerPrixFournisseurs
         public EnregistrerPrixFournisseurs(EMI_RA.API.Client.Fournisseurs unfournisseur)
         {
             InitializeComponent();
             fournisseur = unfournisseur;
         }
+        #endregion
+
+        #region Button_Click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
@@ -56,7 +61,9 @@ namespace EMI_RA_WPF
                 File.WriteAllText(dlg.FileName, liste2);
             }
         }
+        #endregion
 
+        #region Button_Click_1
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             OpenFileDialog opfd = new OpenFileDialog();
@@ -76,5 +83,6 @@ namespace EMI_RA_WPF
             var clientApi = new Client("https://localhost:44313/", new HttpClient());
             var commande = clientApi.Offres2Async(fournisseur.IdFournisseurs, fichier);
         }
+        #endregion
     }
 }

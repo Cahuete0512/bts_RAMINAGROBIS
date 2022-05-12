@@ -22,9 +22,5 @@ namespace EMI_RA
               => (ID, Reference, Libelle, Marque) = (idProduits, reference, libelle, marque);
         public Produits (string reference, string libelle, string marque)
               => (Reference, Libelle, Marque) = (reference, libelle, marque);
-        public Produits(int id)
-        {
-            ID = id;
-        }
     }
 }

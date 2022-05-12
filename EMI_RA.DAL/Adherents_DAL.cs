@@ -17,7 +17,6 @@ namespace EMI_RA.DAL
         public String Email { get; set; }
         public String Adresse { get; set; }
 
-        //constructeur par défaut 
         public Adherents_DAL(String societe, String civiliteContact, String nomContact, String prenomContact, String email, String adresse)
             =>(Societe, CiviliteContact, NomContact, PrenomContact, Email, Adresse) 
             = (societe, civiliteContact, nomContact, prenomContact, email, adresse);

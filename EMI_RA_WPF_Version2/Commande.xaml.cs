@@ -15,12 +15,16 @@ namespace EMI_RA.WPF
     public partial class Commande : System.Windows.Controls.Page
     {
         EMI_RA.API.Client.Adherents adherent;
+
+        #region Commande
         public Commande(EMI_RA.API.Client.Adherents unAdherent)
         {
             InitializeComponent();
             adherent = unAdherent;
         }
+        #endregion
 
+        #region Choisir_Click
         private void Choisir_Click(object sender, RoutedEventArgs e)
         {
 
@@ -42,5 +46,6 @@ namespace EMI_RA.WPF
             var clientApi = new Client("https://localhost:44313/", new HttpClient());
             var commande = clientApi.CommandeVersion2Async(adherent.Id, fichier);
         }
+        #endregion
     }
 }

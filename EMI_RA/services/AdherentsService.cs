@@ -10,6 +10,7 @@ namespace EMI_RA
     public class AdherentsService : IAdherentsService
     {
         private Adherents_Depot_DAL depotAdherents = new Adherents_Depot_DAL();
+
         #region GetAllAdherents
         public List<Adherents> GetAllAdherents()
         {

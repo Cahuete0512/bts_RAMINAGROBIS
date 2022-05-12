@@ -48,7 +48,7 @@ namespace EMI_RA.API.Controllers
         #endregion
 
         #region GenererListeAchatString
-        // récup les infos du CSV passé par le WPF
+        // récup les infos du CSV passée par le WPF
         [HttpPost("commandeVersion2")]
         public void GenererListeAchatString(int IdAdherent, IEnumerable<string> csvFile)
         {

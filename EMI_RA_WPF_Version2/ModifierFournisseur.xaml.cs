@@ -11,7 +11,7 @@ namespace EMI_RA.WPF
     /// </summary>
     public partial class ModifierFournisseur : Page
     {
-
+        #region ModifierFournisseur
         public ModifierFournisseur(API.Client.Fournisseurs fournisseur)
         {
             InitializeComponent();
@@ -24,6 +24,9 @@ namespace EMI_RA.WPF
             adresse.Text = fournisseur.Adresse;
             actif.IsChecked = fournisseur.Actif;
         }
+        #endregion
+
+        #region Button_Click
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var clientApi = new Client("https://localhost:5001/", new HttpClient());
@@ -51,5 +54,6 @@ namespace EMI_RA.WPF
                 MessageBox.Show("Le fournisseur est actif");
             }
         }
+        #endregion
     }
 }

@@ -199,7 +199,7 @@ namespace EMI_RA
                     .Append(";0")
                     .Append("\n");
             }
-
+            //convertit une chaîne C# en tableau d’octets au format Ascii et on place le tableau dans une variable
             byte[] bytes = Encoding.ASCII.GetBytes(contentBuilder.ToString());
             MemoryStream stream = new MemoryStream(bytes);
             return stream;
@@ -297,7 +297,7 @@ namespace EMI_RA
             }
             else if(paniersGlobaux.Cloture==true)
             {
-                throw new Exception($"Le panier avec identifié : {paniersGlobaux.ID} est déjà clôturé.");
+                throw new Exception($"Le panier identifié : {paniersGlobaux.ID} est déjà clôturé.");
             }
         }
         #endregion

@@ -12,11 +12,13 @@ namespace EMI_RA_WPF
     /// </summary>
     public partial class LancerEnchere : System.Windows.Controls.Page
     {
-
+        #region LancerEnchere
         public LancerEnchere()
         {
             InitializeComponent();
         }
+        #endregion
+
         #region Button_Click
         private async void Button_Click(object sender, RoutedEventArgs e)
         {

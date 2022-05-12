@@ -12,7 +12,7 @@ namespace EMI_RA.WPF
     /// </summary>
     public partial class ModifierAdherent : Page
     {
-
+        #region ModifierAdherent
         public ModifierAdherent(API.Client.Adherents adherent)
         {
             InitializeComponent();
@@ -24,6 +24,9 @@ namespace EMI_RA.WPF
             email.Text = adherent.Email;
             adresse.Text = adherent.Adresse;
         }
+        #endregion
+
+        #region Button_Click
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             var clientApi = new Client("https://localhost:5001/", new HttpClient());
@@ -41,8 +44,7 @@ namespace EMI_RA.WPF
             };
             var adherent = await clientApi.AdherentsPUTAsync(adherentDTO);
             MessageBox.Show("L'adhérent a été modifié");
-
-
         }
+        #endregion
     }
 }

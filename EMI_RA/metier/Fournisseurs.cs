@@ -25,8 +25,8 @@ namespace EMI_RA
                     => (IdFournisseurs, Societe, CiviliteContact, NomContact, PrenomContact, Email, Adresse) = (idFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse);
         public Fournisseurs(int iDFournisseurs, String societe, String civiliteContact, String nomContact, String prenomContact, String email, String adresse, DateTime dateAdhesion, Boolean actif)
                    => (IdFournisseurs, Societe, CiviliteContact, NomContact, PrenomContact, Email, Adresse, DateAdhesion, Actif) = (iDFournisseurs, societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion, actif);
-        public Fournisseurs(int iDFournisseurs, String societe, String civiliteContact, String nomContact, String prenomContact, String email, String adresse, DateTime dateAdhesion) 
-            : this (societe, civiliteContact, nomContact, prenomContact, email, adresse)
+        public Fournisseurs(int iDFournisseurs, String societe, String civiliteContact, String nomContact, String prenomContact, String email, String adresse, DateTime dateAdhesion)
+            : this(societe, civiliteContact, nomContact, prenomContact, email, adresse)
         {
             IdFournisseurs = iDFournisseurs;
             DateAdhesion = dateAdhesion;
@@ -34,10 +34,6 @@ namespace EMI_RA
         public Fournisseurs(int id)
         {
             IdFournisseurs = id;
-        }
-        public Fournisseurs()
-        {
-            
         }
     }
 }
