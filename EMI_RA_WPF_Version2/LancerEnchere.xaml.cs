@@ -49,7 +49,7 @@ namespace EMI_RA_WPF
             }
             else
             {
-                MessageBox.Show($"la période d'enchère est non-valide, vous devez sélectionner six jours maximum");
+                MessageBox.Show($"la période d'enchère est non-valide, il faut que votre sélection soit comprise dans la semaine en cours, ne doit pas inclure le dimanche et ne doit pas dépasser 6 jours");
             }
         }
         #endregion

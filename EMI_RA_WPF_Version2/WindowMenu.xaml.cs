@@ -196,17 +196,11 @@ namespace EMI_RA.WPF
         #region MenuItemLancerEnchereSelectionne_click
         private void MenuItemLancerEnchereSelectionne_click(object sender, RoutedEventArgs e)
         {
-            if (GestionnaireDeFenetres.LancerEnchere == null)
-            {
-                MessageBox.Show("Veuillez selectionner une date");
-            }
-            else
-            {
+
                 GestionnaireDeFenetres.LancerEnchere = new LancerEnchere();
 
                 Main.Navigate(GestionnaireDeFenetres.LancerEnchere);
 
-            }
         }
         #endregion
 
