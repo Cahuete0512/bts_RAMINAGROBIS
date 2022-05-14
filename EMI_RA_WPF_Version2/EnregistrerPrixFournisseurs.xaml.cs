@@ -25,11 +25,16 @@ namespace EMI_RA_WPF
     public partial class EnregistrerPrixFournisseurs : Page
     {
         Fournisseurs fournisseur;
+
+        #region EnregistrerPrixFournisseurs
         public EnregistrerPrixFournisseurs(EMI_RA.API.Client.Fournisseurs unfournisseur)
         {
             InitializeComponent();
             fournisseur = unfournisseur;
         }
+        #endregion
+
+        #region Button_Click
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
@@ -51,29 +56,20 @@ namespace EMI_RA_WPF
                 liste2 = liste2 + list.ElementAt(i);
             }
 
-
-
-            // var open = adherent.OpenFile();
-
             if (result == true)
             {
-                // Save document
-                // string filename = dlg.FileName;
                 File.WriteAllText(dlg.FileName, liste2);
             }
         }
+        #endregion
 
+        #region Button_Click_1
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
-
             OpenFileDialog opfd = new OpenFileDialog();
             opfd.Filter = "CSV files (*.csv)|*.csv|XML files (*.xml)|*.xml";
             opfd.ShowDialog();
             var liste = File.ReadAllText(opfd.FileName);
-
-
-            //var open = OpenFileDialog1.OpenFile();
 
             var fichiercsv = File.ReadLines(opfd.FileName);
             List<string> fichier = fichiercsv.Skip(1).Take(fichiercsv.Count() - 1).ToList();
@@ -84,11 +80,9 @@ namespace EMI_RA_WPF
                 fichier.ToList().Add(fichiercsv.ElementAt(i));
             }
 
-
-            //  txt.Text = fichier.ElementAt(1) ;
-
             var clientApi = new Client("https://localhost:44313/", new HttpClient());
             var commande = clientApi.Offres2Async(fournisseur.IdFournisseurs, fichier);
         }
+        #endregion
     }
 }

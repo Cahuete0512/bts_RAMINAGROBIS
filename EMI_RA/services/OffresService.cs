@@ -1,22 +1,21 @@
 ﻿using EMI_RA.DAL;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EMI_RA
 {
     public class OffresService : IOffresService
     {
         private Offres_Depot_DAL depot = new Offres_Depot_DAL();
-
+        #region GetAllOffres
         public List<Offres> GetAllOffres()
         {
             var offre = depot.GetAll()
                 .Select(offre => new Offres(offre.IdOffres,
                                             offre.IdFournisseurs,
+                                            offre.NomContact,
                                             offre.IdPaniersGlobaux,
+                                            offre.Libelle,
                                             offre.IdProduits,
                                             offre.Quantite,
                                             offre.Prix,
@@ -25,7 +24,8 @@ namespace EMI_RA
 
             return offre;
         }
-
+        #endregion
+        #region GetOffreByIDFournisseur
         public Offres GetOffreByIDFournisseur(int idFournisseur)
         {
             var offre = depot.GetByIDFournisseur(idFournisseur);
@@ -39,7 +39,8 @@ namespace EMI_RA
                                             offre.Gagne);
 
         }
-
+        #endregion
+        #region GetOffreByIDPaniers
         public List<Offres> GetOffreByIDPaniers(int idPaniersGlobaux)
         {
             var offre = depot.GetByIDPaniers(idPaniersGlobaux)
@@ -55,7 +56,8 @@ namespace EMI_RA
             return offre;
 
         }
-
+        #endregion
+        #region Insert
         public Offres Insert(Offres offres)
         {
             var offre = new Offres_DAL(offres.IdFournisseurs,
@@ -68,6 +70,8 @@ namespace EMI_RA
 
             return offres;
         }
+        #endregion
+        #region Update
         public void Update(Offres offres)
         {
             var offre = new Offres_DAL(offres.IdOffres,
@@ -79,20 +83,19 @@ namespace EMI_RA
                                         offres.Gagne);
             depot.Update(offre);
         }
-
+        #endregion
+        #region GetMeilleursOffres
         public List<Offres> GetMeilleursOffres(int idPaniersGlobaux)
         {
             var offre = depot.GetGagneByIDPaniers(idPaniersGlobaux)
-                .Select(offre => new Offres(offre.NomFournisseur,
-                                            offre.NomProduit,
+                .Select(offre => new Offres(offre.NomContact,
+                                            offre.Libelle,
                                             offre.Quantite,
                                             offre.Prix))
                 .ToList();
 
             return offre;
         }
-
+        #endregion
     }
-
-    
 }

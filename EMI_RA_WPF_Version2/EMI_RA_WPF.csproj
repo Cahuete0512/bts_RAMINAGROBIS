@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1000" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
@@ -34,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AjouterAdhérent.xaml.cs">
+    <Compile Update="AjouterAdherentajouterAdherent.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="AjouterFournisseurs.xaml.cs">
@@ -61,7 +60,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="AjouterAdhérent.xaml">
+    <Page Update="AjouterAdherentajouterAdherent.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

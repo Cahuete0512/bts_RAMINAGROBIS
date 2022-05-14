@@ -21,12 +21,15 @@ namespace EMI_RA.API.Controllers
             service = srv;
         }
 
+        #region GetPaniersGlobauxByID
         [HttpGet]
         public IEnumerable<LignesPaniersGlobaux> GetPaniersGlobauxByID()
         {
             return service.GetAllLignesPaniersGlobaux();
         }
+        #endregion
 
+        #region Insert
         [HttpPost]
         public LignesPaniersGlobaux Insert(LignesPaniersGlobaux l)
         {
@@ -34,5 +37,6 @@ namespace EMI_RA.API.Controllers
             
             return l_metier;
         }
+        #endregion
     }
 }

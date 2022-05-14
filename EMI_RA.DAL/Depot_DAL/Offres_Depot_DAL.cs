@@ -15,12 +15,14 @@ namespace EMI_RA.DAL
         {
 
         }
+
+        #region Insert
         public override Offres_DAL Insert(Offres_DAL offre)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "insert into offres (idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne)"
-                                    + " values (@idFournisseurs, @idPaniersGlobaux,@idProduits, @quantite, @prix, 0);  SELECT SCOPE_IDENTITY();";
+            commande.CommandText = "insert into offres (idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne)"+ 
+                                    "values (@idFournisseurs, @idPaniersGlobaux,@idProduits, @quantite, @prix, 0);  SELECT SCOPE_IDENTITY();";
             commande.Parameters.Add(new SqlParameter("@idFournisseurs", offre.IdFournisseurs));
             commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", offre.IdPaniersGlobaux));
             commande.Parameters.Add(new SqlParameter("@idProduits", offre.IdProduits));
@@ -34,11 +36,17 @@ namespace EMI_RA.DAL
 
             return offre;
         }
+        #endregion
+
+        #region GetAll
         public override List<Offres_DAL> GetAll()
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idOffres, idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne from offres";
+            commande.CommandText = "select idOffres, fournisseurs.idFournisseurs, fournisseurs.nomContact, idPaniersGlobaux, libelle, produits.idProduits, quantite, prix, gagne from offres " +
+                                    "join produits on offres.idProduits = produits.idProduits " +
+                                    "join fournisseurs on offres.idFournisseurs = fournisseurs.idFournisseurs " +
+                                    "where gagne = 1";
             //pour lire les lignes une par une
             var reader = commande.ExecuteReader();
 
@@ -47,7 +55,15 @@ namespace EMI_RA.DAL
             while (reader.Read())
             {
                 //dans reader.GetInt32 on met la colonne que l'on souhaite récupérer ici 0 = ID, 1 = Societe...
-                var offre = new Offres_DAL(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetFloat(5), reader.GetBoolean(6));
+                var offre = new Offres_DAL(reader.GetInt32(0), 
+                                           reader.GetInt32(1), 
+                                           reader.GetString(2), 
+                                           reader.GetInt32(3), 
+                                           reader.GetString(4), 
+                                           reader.GetInt32(5), 
+                                           reader.GetInt32(6), 
+                                           reader.GetFloat(7), 
+                                           reader.GetBoolean(8));
 
                 listeDOffres.Add(offre);
             }
@@ -56,18 +72,23 @@ namespace EMI_RA.DAL
 
             return listeDOffres;
         }
+        #endregion
 
-
+        #region GetByID
         public override Offres_DAL GetByID(int ID)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region GetByIDFournisseur
         public Offres_DAL GetByIDFournisseur(int idFournisseurs)
         {
             CreerConnexionEtCommande();
             
-            commande.CommandText = "select idOffres, idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne from offres where idFournisseurs=@idFournisseurs";
+            commande.CommandText = "select idOffres, idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne " +
+                                    "from offres " +
+                                    "where idFournisseurs=@idFournisseurs";
             commande.Parameters.Add(new SqlParameter("@idFournisseurs", idFournisseurs));
             var reader = commande.ExecuteReader();
 
@@ -76,7 +97,13 @@ namespace EMI_RA.DAL
             Offres_DAL offre;
             if (reader.Read())
             {
-                offre = new Offres_DAL(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetFloat(5), reader.GetBoolean(6));
+                offre = new Offres_DAL(reader.GetInt32(0), 
+                                       reader.GetInt32(1), 
+                                       reader.GetInt32(2), 
+                                       reader.GetInt32(3), 
+                                       reader.GetInt32(4), 
+                                       reader.GetFloat(5),
+                                       reader.GetBoolean(6));
             }
             else
                 throw new Exception($"Pas d'offre dans la BDD avec l'idFournisseur {idFournisseurs}");
@@ -85,12 +112,16 @@ namespace EMI_RA.DAL
 
             return offre;
         }
+        #endregion
 
+        #region GetByIDPaniers
         public List<Offres_DAL> GetByIDPaniers(int idPaniersGlobaux)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idOffres, idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne from offres where idPaniersGlobaux=@idPaniersGlobaux";
+            commande.CommandText = "select idOffres, idFournisseurs, idPaniersGlobaux, idProduits, quantite, prix, gagne " +
+                                    "from offres " +
+                                    "where idPaniersGlobaux=@idPaniersGlobaux";
             commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", idPaniersGlobaux));
             var reader = commande.ExecuteReader();
 
@@ -98,7 +129,13 @@ namespace EMI_RA.DAL
 
             while (reader.Read())
             {
-                Offres_DAL offre = new Offres_DAL(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetInt32(4), reader.GetFloat(5), reader.GetBoolean(6));
+                Offres_DAL offre = new Offres_DAL(reader.GetInt32(0), 
+                                                  reader.GetInt32(1), 
+                                                  reader.GetInt32(2), 
+                                                  reader.GetInt32(3), 
+                                                  reader.GetInt32(4), 
+                                                  reader.GetFloat(5), 
+                                                  reader.GetBoolean(6));
                 listeOffre.Add(offre);
             }
 
@@ -106,12 +143,15 @@ namespace EMI_RA.DAL
 
             return listeOffre;
         }
+        #endregion
 
+        #region Update
         public override Offres_DAL Update(Offres_DAL offre)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "update offres set idPaniersGlobaux = @idPaniersGlobaux, prix = @prix, quantite = @quantite, idProduits = @idProduits, gagne = @gagne, idFournisseurs = @idFournisseurs where idOffres=@idOffres";
+            commande.CommandText = "update offres set idPaniersGlobaux = @idPaniersGlobaux, prix = @prix, quantite = @quantite, idProduits = @idProduits, gagne = @gagne, idFournisseurs = @idFournisseurs " +
+                                    "where idOffres=@idOffres";
             commande.Parameters.Add(new SqlParameter("@idOffres", offre.IdOffres));
             commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", offre.IdPaniersGlobaux));
             commande.Parameters.Add(new SqlParameter("@prix", offre.Prix));
@@ -130,16 +170,24 @@ namespace EMI_RA.DAL
 
             return offre;
         }
+        #endregion
+
+        #region Delete
         public override void Delete(Offres_DAL offre)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region GetGagneByIDPaniers
         public List<Offres_DAL> GetGagneByIDPaniers(int idPaniersGlobaux)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select societe, libelle, quantite, prix from offres join produits on offres.idProduits = produits.idProduits join fournisseurs on offres.idFournisseurs = fournisseurs.idFournisseurs where idPaniersGlobaux = @idPaniersGlobaux and gagne = 1";
+            commande.CommandText = "select societe, libelle, quantite, prix from offres " +
+                                    "join produits on offres.idProduits = produits.idProduits " +
+                                    "join fournisseurs on offres.idFournisseurs = fournisseurs.idFournisseurs " +
+                                    "where idPaniersGlobaux = @idPaniersGlobaux and gagne = 1";
             commande.Parameters.Add(new SqlParameter("@idPaniersGlobaux", idPaniersGlobaux));
             var reader = commande.ExecuteReader();
 
@@ -147,7 +195,10 @@ namespace EMI_RA.DAL
 
             while (reader.Read())
             {
-                Offres_DAL offre = new Offres_DAL(reader.GetString(0), reader.GetString(1), reader.GetInt32(2), reader.GetFloat(3));
+                Offres_DAL offre = new Offres_DAL(reader.GetString(0), 
+                                                  reader.GetString(1), 
+                                                  reader.GetInt32(2), 
+                                                  reader.GetFloat(3));
                 listeOffre.Add(offre);
             }
 
@@ -155,5 +206,6 @@ namespace EMI_RA.DAL
 
             return listeOffre;
         }
+        #endregion
     }
 }

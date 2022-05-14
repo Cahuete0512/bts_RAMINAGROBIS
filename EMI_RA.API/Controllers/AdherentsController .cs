@@ -22,6 +22,7 @@ namespace EMI_RA.API.Controllers
             this.paniersGlobauxService = paniersGlobauxService;
         }
 
+        #region GetAllAdherents
         [HttpGet]
         public IEnumerable<Adherents> GetAllAdherents()
         {
@@ -36,21 +37,26 @@ namespace EMI_RA.API.Controllers
                 a.Adresse
             ));
         }
+        #endregion
 
+        #region GenererListeAchat
         [HttpPost("commande")]
         public void GenererListeAchat(int IdAdherent, IFormFile csvFile)
         {
-            paniersGlobauxService.genererListeAchat(IdAdherent, csvFile);
+            paniersGlobauxService.GenererListeAchat(IdAdherent, csvFile);
         }
+        #endregion
 
+        #region GenererListeAchatString
+        // récup les infos du CSV passée par le WPF
         [HttpPost("commandeVersion2")]
         public void GenererListeAchatString(int IdAdherent, IEnumerable<string> csvFile)
         {
-            paniersGlobauxService.genererListeAchatString(IdAdherent, csvFile);
-
-
+            paniersGlobauxService.GenererListeAchatString(IdAdherent, csvFile);
         }
+        #endregion
 
+        #region Insert
         [HttpPost]
         public Adherents Insert(Adherents a)
         {
@@ -58,7 +64,9 @@ namespace EMI_RA.API.Controllers
             
             return a_metier;
         }
+        #endregion
 
+        #region Update
         [HttpPut]
         public Adherents Update(Adherents a)
         {
@@ -66,11 +74,14 @@ namespace EMI_RA.API.Controllers
             
             return a_metier;
         }
-    
+        #endregion
+
+        #region Delete
         [HttpDelete ("{id}")]
         public void Delete([FromRoute] int id)
         {
             service.Delete(new Adherents(id));
         }
+        #endregion
     }
 }

@@ -11,10 +11,11 @@ namespace EMI_RA.DAL
     {
         public int IDPaniersGlobaux { get; set; }
 
-        public List<PaniersGlobaux_DAL> PaniersGlobaux { get; set; }
         public int NumeroSemaine { get; set; }
         public int Annee { get; set; }
         public Boolean Cloture { get; set; }
+        public List<LignesPaniersGlobaux_DAL> lignesPaniersGlobauxListe { get; set; }
+
         public PaniersGlobaux_DAL(int numeroSemaine, int annee)
                     => (NumeroSemaine, Annee) = (numeroSemaine, annee);
         public PaniersGlobaux_DAL(int numeroSemaine, int annee, Boolean cloture)

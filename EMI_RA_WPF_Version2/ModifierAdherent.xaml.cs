@@ -1,19 +1,8 @@
 ﻿using EMI_RA.API.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EMI_RA.WPF
 {
@@ -23,7 +12,7 @@ namespace EMI_RA.WPF
     /// </summary>
     public partial class ModifierAdherent : Page
     {
-
+        #region ModifierAdherent
         public ModifierAdherent(API.Client.Adherents adherent)
         {
             InitializeComponent();
@@ -35,9 +24,12 @@ namespace EMI_RA.WPF
             email.Text = adherent.Email;
             adresse.Text = adherent.Adresse;
         }
+        #endregion
+
+        #region Button_Click
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
 
             var adherentDTO = new API.Client.Adherents()
             {
@@ -52,8 +44,7 @@ namespace EMI_RA.WPF
             };
             var adherent = await clientApi.AdherentsPUTAsync(adherentDTO);
             MessageBox.Show("L'adhérent a été modifié");
-
-
         }
+        #endregion
     }
 }

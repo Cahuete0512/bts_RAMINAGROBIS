@@ -16,6 +16,7 @@ namespace EMI_RA.DAL
         public string Reference { get; set; }
         public List<AssoProduitsFournisseurs_DAL> ProduitsFournisseurs { get; set; }
         public bool Disponible { get; set; }
+        public List<Fournisseurs_DAL> fournisseurListe { get; set; }
 
         public Produits_DAL(int idProduits, string libelle, string marque, string reference, bool disponible)
             => (ID, Libelle, Marque, Reference, Disponible) = (idProduits, libelle, marque, reference, disponible);
@@ -26,41 +27,5 @@ namespace EMI_RA.DAL
             => (ID, Libelle, Marque, Reference) = (idProduits, libelle, marque, reference);
         public Produits_DAL(string libelle, string marque, string reference)
            => (Libelle, Marque, Reference) = (libelle, marque, reference);
-
-        /*public void Insert()
-        {
-            var chaineConnexion = "Data Source=localhost;Initial Catalog=EMI-r;Integrated Security=True";
-
-            //Créer une connexion
-            using (var connexion = new SqlConnection(chaineConnexion))
-            {
-                //ouvrir la connexion
-                connexion.Open();
-
-                //créer une commande pour l'instruction SQL à executer
-                using (var commande = new SqlCommand())
-                {
-                    //définir la connexion à utiliser
-                    commande.Connection = connexion;
-
-                    //définir l'instruction SQL
-                    //avec des paramètres si besoin
-                    //SELECT SCOPE_IDENTITY() va renvoyer l'ID créé
-
-                    commande.CommandText = "insert into produits (libelle, marque, idFournisseurs, reference) values (@libelle, @marque, @idFournisseurs, @reference) ; SELECT SCOPE_IDENTITY()";
-                    commande.Parameters.Add(new SqlParameter("@libelle", Libelle));
-                    commande.Parameters.Add(new SqlParameter("@marque", Marque));
-                    commande.Parameters.Add(new SqlParameter("@idFournisseurs", IdFournisseurs));
-                    commande.Parameters.Add(new SqlParameter("@reference", Reference));
-                    ID = (int)commande.ExecuteScalar();
-
-
-                }
-
-
-                //fermer la connexion
-                connexion.Close();
-            }
-        }*/
     }
 }

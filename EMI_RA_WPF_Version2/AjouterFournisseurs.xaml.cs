@@ -32,7 +32,8 @@ namespace EMI_RA.WPF
         {
             InitializeComponent();
         }
-       
+
+        #region Button_Click
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             Societe = societe.Text;
@@ -42,7 +43,7 @@ namespace EMI_RA.WPF
             Email = email.Text;
             Adresse = adresse.Text;
 
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
             var fournisseursDTO = new EMI_RA.API.Client.Fournisseurs()
             {
 
@@ -56,7 +57,7 @@ namespace EMI_RA.WPF
             };
             var fournisseurs = await clientApi.FournisseursPOSTAsync(fournisseursDTO);
             MessageBox.Show("Le fournisseur a été enregistré");
-
         }
+        #endregion 
     }
 }

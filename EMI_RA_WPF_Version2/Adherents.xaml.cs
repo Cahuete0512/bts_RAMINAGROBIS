@@ -19,19 +19,22 @@ namespace EMI_RA.WPF
 {
     public partial class Adherents : Page
     {
+        #region Adherents
         public Adherents()
         {
             InitializeComponent();
         }
+        #endregion
 
+        #region Window_Loaded
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
 
             var adherents = await clientApi.AdherentsAllAsync();
 
             liste.ItemsSource = adherents;
-
         }
+        #endregion 
     }
 }

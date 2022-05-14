@@ -1,8 +1,6 @@
-﻿using System;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 
 namespace EMI_RA.DAL
 {
@@ -13,6 +11,7 @@ namespace EMI_RA.DAL
         protected SqlConnection connexion;
         protected SqlCommand commande;
 
+        #region Depot_DAL
         public Depot_DAL()
         {
             // pour lire la config, on a besoin d'un objet, le "ConfigurationBuilder"
@@ -22,7 +21,9 @@ namespace EMI_RA.DAL
             ChaineDeConnexion = config.GetSection("ConnectionStrings:default").Value;
 
         }
+        #endregion
 
+        #region CreerConnexionEtCommande
         protected void CreerConnexionEtCommande()
         {
             connexion = new SqlConnection(ChaineDeConnexion);
@@ -30,13 +31,17 @@ namespace EMI_RA.DAL
             commande = new SqlCommand();
             commande.Connection = connexion;
         }
+        #endregion
 
+        #region DetruireConnexionEtCommande
         protected void DetruireConnexionEtCommande()
         {
-            commande.Dispose(); // détruit la partie externe à la mémoire dotnet qui a été utilisée
+            // détruit la partie externe à la mémoire dotnet qui a été utilisée
+            commande.Dispose(); 
             connexion.Close();
             connexion.Dispose();
         }
+        #endregion
 
         #region Méthodes abstraites
         public abstract void Delete(Type_DAL item);

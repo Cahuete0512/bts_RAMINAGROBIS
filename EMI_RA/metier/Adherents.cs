@@ -9,7 +9,6 @@ namespace EMI_RA
     public class Adherents
     {
         public int ID { get; set; }
-
         public String Societe { get; set; }
         public String CiviliteContact { get; set; }
         public String NomContact { get; set; }
@@ -23,10 +22,6 @@ namespace EMI_RA
         public Adherents(int id)
         {
             ID = id;
-        }
-        public Adherents()
-        {
-         
         }
     }
 }

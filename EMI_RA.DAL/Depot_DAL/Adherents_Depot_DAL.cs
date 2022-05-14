@@ -1,10 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EMI_RA.DAL
 {
@@ -16,11 +12,13 @@ namespace EMI_RA.DAL
 
         }
 
+        #region GetAll
         public override List<Adherents_DAL> GetAll()
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idAdherents, societe, civiliteContact, nomContact, prenomContact, email, adresse from adherents";
+            commande.CommandText = "select idAdherents, societe, civiliteContact, nomContact, prenomContact, email, adresse " +
+                                    "from adherents";
             //pour lire les lignes une par une
             var reader = commande.ExecuteReader();
 
@@ -29,7 +27,13 @@ namespace EMI_RA.DAL
             while (reader.Read())
             {
                 //dans reader.GetInt32 on met la colonne que l'on souhaite récupérer ici 0 = ID, 1 = Societe...
-                var adherent = new Adherents_DAL(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetString(5), reader.GetString(6));
+                var adherent = new Adherents_DAL(reader.GetInt32(0),
+                                                 reader.GetString(1), 
+                                                 reader.GetString(2), 
+                                                 reader.GetString(3), 
+                                                 reader.GetString(4), 
+                                                 reader.GetString(5), 
+                                                 reader.GetString(6));
 
                 listeDeAdherents.Add(adherent);
             }
@@ -38,13 +42,15 @@ namespace EMI_RA.DAL
 
             return listeDeAdherents;
         }
+        #endregion
 
+        #region GetByID
         public override Adherents_DAL GetByID(int ID)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idAdherents, societe, civiliteContact, nomContact, prenomContact, email, adresse from adherents"
-            +" where idAdherents=@ID";
+            commande.CommandText = "select idAdherents, societe, civiliteContact, nomContact, prenomContact, email, adresse from adherents"+
+                                   "where idAdherents=@ID";
             commande.Parameters.Add(new SqlParameter("@ID", ID));
             var reader = commande.ExecuteReader();
 
@@ -54,13 +60,12 @@ namespace EMI_RA.DAL
             if (reader.Read())
             {
                 adherent = new Adherents_DAL(reader.GetInt32(0),
-                                        reader.GetString(1),
-                                        reader.GetString(2),
-                                        reader.GetString(3),
-                                        reader.GetString(4),
-                                        reader.GetString(5),
-                                        reader.GetString(6)
-                                        );
+                                             reader.GetString(1),
+                                             reader.GetString(2),
+                                             reader.GetString(3),
+                                             reader.GetString(4),
+                                             reader.GetString(5),
+                                             reader.GetString(6));
             }
             else
                 throw new Exception($"Pas de adherent dans la BDD avec l'ID {ID}");
@@ -69,13 +74,15 @@ namespace EMI_RA.DAL
 
             return adherent;
         }
+        #endregion
 
+        #region Insert
         public override Adherents_DAL Insert(Adherents_DAL adherent)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "insert into adherents (societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion)"
-                                    + " values (@societe, @civiliteContact, @nomContact, @prenomContact, @email, @adresse, @dateAdhesion); select scope_identity()";
+            commande.CommandText = "insert into adherents (societe, civiliteContact, nomContact, prenomContact, email, adresse, dateAdhesion)"+ 
+                                   "values (@societe, @civiliteContact, @nomContact, @prenomContact, @email, @adresse, @dateAdhesion); select scope_identity()";
             commande.Parameters.Add(new SqlParameter("@societe", adherent.Societe));
             commande.Parameters.Add(new SqlParameter("@civiliteContact", adherent.CiviliteContact));
             commande.Parameters.Add(new SqlParameter("@nomContact", adherent.NomContact));
@@ -92,13 +99,15 @@ namespace EMI_RA.DAL
 
             return adherent;
         }
+        #endregion
 
+        #region Update
         public override Adherents_DAL Update(Adherents_DAL adherent)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "update adherents set societe = @societe, civiliteContact = @civiliteContact, nomContact = @nomContact, prenomContact = @prenomContact, email = @email, adresse = @adresse "
-                                    + " where idAdherents=@ID";
+            commande.CommandText = "update adherents set societe = @societe, civiliteContact = @civiliteContact, nomContact = @nomContact, prenomContact = @prenomContact, email = @email, adresse = @adresse "+ 
+                                   "where idAdherents=@ID";
             commande.Parameters.Add(new SqlParameter("@ID", adherent.ID));
             commande.Parameters.Add(new SqlParameter("@societe", adherent.Societe));
             commande.Parameters.Add(new SqlParameter("@civiliteContact", adherent.CiviliteContact));
@@ -117,7 +126,9 @@ namespace EMI_RA.DAL
 
             return adherent;
         }
+        #endregion
 
+        #region Delete
         public override void Delete(Adherents_DAL adherent)
         {
             CreerConnexionEtCommande();
@@ -133,5 +144,6 @@ namespace EMI_RA.DAL
 
             DetruireConnexionEtCommande();
         }
+        #endregion
     }
 }

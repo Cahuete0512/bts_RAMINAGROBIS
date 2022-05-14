@@ -13,12 +13,14 @@ namespace EMI_RA.API.Controllers
     public class FournisseursController : Controller
     {
         private IFournisseursService service;
-
+        #region FournisseursController
         public FournisseursController(IFournisseursService srv)
         {
             service = srv;
         }
+        #endregion
 
+        #region GetAllFournisseurs
         [HttpGet]
         public IEnumerable<Fournisseurs> GetAllFournisseurs()
         {
@@ -30,20 +32,28 @@ namespace EMI_RA.API.Controllers
                 f.PrenomContact,
                 f.Email,
                 f.Adresse,
-                f.DateAdhesion));
+                f.DateAdhesion,
+                f.Actif));
         }
+        #endregion
 
+        #region AlimenterCatalogue
         [HttpPost("catalogue/{IdFournisseurs}")]
         public void AlimenterCatalogue(int IdFournisseurs, IFormFile csvFile)
         {
-            service.alimenterCatalogue(IdFournisseurs, csvFile);
+            service.AlimenterCatalogue(IdFournisseurs, csvFile);
         }
-        [HttpPost("catalogueVersion2/{IdFournisseurs}")]
+        #endregion
+        
+        #region AlimenterCatalogueString
+        [HttpPost("catalogueStringCSV/{IdFournisseurs}")]
         public void AlimenterCatalogueString(int IdFournisseurs, List<string> csvFile)
         {
-            service.alimenterCatalogueVersion2(IdFournisseurs, csvFile);
+            service.AlimenterCatalogueStringCSV(IdFournisseurs, csvFile);
         }
+        #endregion
 
+        #region InsertFournisseur
         [HttpPost]
         public Fournisseurs Insert(Fournisseurs f)
         {
@@ -51,7 +61,9 @@ namespace EMI_RA.API.Controllers
 
             return f_metier;
         }
+        #endregion
 
+        #region UpdateFournisseur
         [HttpPut]
         public Fournisseurs Update(Fournisseurs f)
         {
@@ -59,11 +71,22 @@ namespace EMI_RA.API.Controllers
 
             return f_metier;
         }
+        #endregion
 
-        [HttpDelete("{id}")]
-        public void Delete([FromRoute] int id)
+        #region DesactiverFournisseur
+        [HttpPost("desactiver")]
+        public void Desactiver(int IdFournisseurs)
         {
-            service.Delete(new Fournisseurs(id));
+            service.Desactiver(IdFournisseurs);
         }
+        #endregion
+
+        #region DeleteFournisseur
+        [HttpDelete("{id}")]
+        public void Delete([FromRoute] int IdFournisseurs)
+        {
+            service.Delete(new Fournisseurs(IdFournisseurs));
+        }
+        #endregion
     }
 }

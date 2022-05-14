@@ -10,7 +10,6 @@ namespace EMI_RA
     {
         public int IdFournisseurs { get; set; }
         public int IdProduits { get; set; }
-
         public AssoProduitsFournisseurs(int idFournisseurs, int idProduits)
             => (IdFournisseurs, IdProduits) = (idFournisseurs, idProduits);
     }

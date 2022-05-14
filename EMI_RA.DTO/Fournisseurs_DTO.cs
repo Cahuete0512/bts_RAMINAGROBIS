@@ -12,5 +12,6 @@ namespace EMI_RA.DTO
         public String Email { get; set; }
         public String Adresse { get; set; }
         public DateTime DateAdhesion { get; set; }
+        public bool Actif { get; set; }
     }
 }

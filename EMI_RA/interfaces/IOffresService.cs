@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace EMI_RA
 {
@@ -14,7 +10,5 @@ namespace EMI_RA
         public Offres GetOffreByIDFournisseur(int idFournisseur);
         public void Update(Offres offres);
         public List<Offres> GetMeilleursOffres(int idPaniersGlobaux);
-
-
     }
 }

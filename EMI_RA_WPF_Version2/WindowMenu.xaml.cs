@@ -1,18 +1,7 @@
 ﻿using EMI_RA.API.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using EMI_RA_WPF;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace EMI_RA.WPF
 {
@@ -21,13 +10,16 @@ namespace EMI_RA.WPF
     /// </summary>
     public partial class WindowMenu : Window
     {
+        #region WindowMenu
         public WindowMenu()
         {
             InitializeComponent();
             GestionnaireDeFenetres.PageParDefault = new EMI_RA_WPF.PageParDefault();
             Main.Content = GestionnaireDeFenetres.PageParDefault;
         }
+        #endregion
 
+        #region MenuItemVoirAdherents_click
         private void MenuItemVoirAdherents_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Adherents == null)
@@ -36,24 +28,27 @@ namespace EMI_RA.WPF
             }
             Main.Navigate(GestionnaireDeFenetres.Adherents);
         }
+        #endregion
 
+        #region MenuItemAjouterAdherent_click
         private void MenuItemAjouterAdherent_click(object sender, RoutedEventArgs e)
         {
-            if (GestionnaireDeFenetres.ajouterAdhérent == null)
+            if (GestionnaireDeFenetres.ajouterAdherent == null)
             {
-                GestionnaireDeFenetres.ajouterAdhérent = new AjouterAdhérent();
+                GestionnaireDeFenetres.ajouterAdherent = new ajouterAdherent();
             }
-            //w.Show();
-            // MessageBox.Show("hello");
-            Main.Navigate(GestionnaireDeFenetres.ajouterAdhérent);
+
+            Main.Navigate(GestionnaireDeFenetres.ajouterAdherent);
 
         }
+        #endregion
 
+        #region MenuItemModifierAdherent_click
         private void MenuItemModifierAdherent_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Adherents == null || GestionnaireDeFenetres.Adherents.liste.SelectedItem == null)
             {
-                MessageBox.Show("Voyez selectionner un adhérent dans la liste");
+                MessageBox.Show("Veuillez selectionner un adhérent dans la liste");
             }
             else
             {
@@ -65,18 +60,21 @@ namespace EMI_RA.WPF
                 Main.Navigate(GestionnaireDeFenetres.modifierAdherent);
             }
         }
+        #endregion
 
+        #region  MenuItemVoirFournisseurs_click
         private void MenuItemVoirFournisseurs_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseurs == null)
             {
                 GestionnaireDeFenetres.Fournisseurs = new Fournisseurs();
             }
-            //w.Show();
-            // MessageBox.Show("hello");
+
             Main.Navigate(GestionnaireDeFenetres.Fournisseurs);
         }
+        #endregion
 
+        #region MenuItemAjouterFournisseurs_click
         private void MenuItemAjouterFournisseurs_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.AjouterFournisseurs == null)
@@ -86,12 +84,14 @@ namespace EMI_RA.WPF
 
             Main.Navigate(GestionnaireDeFenetres.AjouterFournisseurs);
         }
+        #endregion
 
+        #region MenuItemModifierFournisseurs_click
         private void MenuItemModifierFournisseurs_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseurs == null || GestionnaireDeFenetres.Fournisseurs.liste.SelectedItem == null)
             {
-                MessageBox.Show("Voyez selectionner un fournisseur dans la liste");
+                MessageBox.Show("Veuillez selectionner un fournisseur dans la liste");
             }
             else
             {
@@ -101,10 +101,11 @@ namespace EMI_RA.WPF
                 }
 
                 Main.Navigate(GestionnaireDeFenetres.modifierFournisseur);
-
             }
         }
+        #endregion
 
+        #region MenuItemVoirPanier_click
         private void MenuItemVoirPanier_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Panier == null)
@@ -114,12 +115,14 @@ namespace EMI_RA.WPF
             Main.Navigate(GestionnaireDeFenetres.Panier);
 
         }
+        #endregion
 
+        #region MenuItemModifierCommande_click
         private void MenuItemModifierCommande_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Adherents == null || GestionnaireDeFenetres.Adherents.liste.SelectedItem == null)
             {
-                MessageBox.Show("Voyez selectionner un adherent dans la liste");
+                MessageBox.Show("Veuillez selectionner un adherent dans la liste");
             }
             else
             {
@@ -130,15 +133,15 @@ namespace EMI_RA.WPF
 
                 Main.Navigate(GestionnaireDeFenetres.Commande);
             }
-           
-
         }
-        
+        #endregion
+
+        #region MenuItemEnregistrerPrix_click
         private void MenuItemEnregistrerPrix_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseurs == null || GestionnaireDeFenetres.Fournisseurs.liste.SelectedItem == null)
             {
-                MessageBox.Show("Voyez selectionner un fournisseur dans la liste");
+                MessageBox.Show("Veuillez selectionner un fournisseur dans la liste");
             }
             else
             {
@@ -149,14 +152,15 @@ namespace EMI_RA.WPF
 
                 Main.Navigate(GestionnaireDeFenetres.EnregistrerPrixFournisseurs);
             }
-           
-
         }
+        #endregion
+
+        #region MenuItemCatalogue_click
         private void MenuItemCatalogue_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Fournisseurs == null || GestionnaireDeFenetres.Fournisseurs.liste.SelectedItem == null)
             {
-                MessageBox.Show("Voyez selectionner un fournisseur dans la liste");
+                MessageBox.Show("Veuillez selectionner un fournisseur dans la liste");
             }
             else
             {
@@ -167,14 +171,15 @@ namespace EMI_RA.WPF
 
                 Main.Navigate(GestionnaireDeFenetres.Catalogue);
             }
-
-
         }
+        #endregion
+
+        #region MenuItemVoirPanierSelectionne_click
         private void MenuItemVoirPanierSelectionne_click(object sender, RoutedEventArgs e)
         {
             if (GestionnaireDeFenetres.Panier == null || GestionnaireDeFenetres.Panier.liste.SelectedItem == null)
             {
-                MessageBox.Show("Voyez selectionner un panier dans la liste");
+                MessageBox.Show("Veuillez selectionner un panier dans la liste");
             }
             else
             {
@@ -185,31 +190,45 @@ namespace EMI_RA.WPF
 
                 Main.Navigate(GestionnaireDeFenetres.voirItemsPanier);
             }
+        }
+        #endregion
 
+        #region MenuItemLancerEnchereSelectionne_click
+        private void MenuItemLancerEnchereSelectionne_click(object sender, RoutedEventArgs e)
+        {
+
+                GestionnaireDeFenetres.LancerEnchere = new LancerEnchere();
+
+                Main.Navigate(GestionnaireDeFenetres.LancerEnchere);
 
         }
-        
+        #endregion
+
+        #region MenuItemCloturerPanierSelectionne_click
         private void MenuItemCloturerPanierSelectionne_click(object sender, RoutedEventArgs e)
         {
 
             if (GestionnaireDeFenetres.Panier == null || GestionnaireDeFenetres.Panier.liste.SelectedItem == null)
             {
-                MessageBox.Show("Voyez selectionner un panier dans la liste");
+                MessageBox.Show("Veuillez selectionner un panier dans la liste");
             }
             else
             {
                 PaniersGlobaux paniers;
                 paniers = (PaniersGlobaux)GestionnaireDeFenetres.Panier.liste.SelectedItem;
+                if (paniers.Cloture)
+                {
+                    MessageBox.Show("Ce panier est déjà clôturé");
+                }
+                else if (!paniers.Cloture)
+                {
+                    var clientApi = new Client("https://localhost:5001/", new HttpClient());
+                    var cloturerPanier = clientApi.CloturerAsync(paniers.Id);
 
-                var clientApi = new Client("https://localhost:44313/", new HttpClient());
-                var cloturerPanier = clientApi.CloturerAsync(paniers.Id);
-
-                MessageBox.Show("Le panier a été cloturé");
-
+                    MessageBox.Show("Le panier a été cloturé");
+                }
             }
-
-
         }
-
+        #endregion
     }
 }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EMI_RA.DAL
 {
@@ -14,6 +11,8 @@ namespace EMI_RA.DAL
         {
 
         }
+
+        #region GetAll
         public override List<AssoProduitsFournisseurs_DAL> GetAll()
         {
             CreerConnexionEtCommande();
@@ -36,7 +35,9 @@ namespace EMI_RA.DAL
 
             return listeDeProduitsFournisseurs;
         }
+        #endregion
 
+        #region Insert
         public override AssoProduitsFournisseurs_DAL Insert(AssoProduitsFournisseurs_DAL assoProduitsFournisseurs)
         {
             CreerConnexionEtCommande();
@@ -50,36 +51,45 @@ namespace EMI_RA.DAL
 
             return assoProduitsFournisseurs;
         }
+        #endregion
 
+        #region Delete
         public void Delete(int idProduits, int idFournisseurs)
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "delete from assoProduitsFournisseurs where idFournisseurs=@idFournisseurs and idProduits=@idProduits";
+            commande.CommandText = "delete from assoProduitsFournisseurs " +
+                                   "where idFournisseurs=@idFournisseurs and idProduits=@idProduits";
             commande.Parameters.Add(new SqlParameter("@idProduits", idProduits));
             commande.Parameters.Add(new SqlParameter("@idFournisseurs", idFournisseurs));
             commande.ExecuteNonQuery();
 
             DetruireConnexionEtCommande();
         }
+        #endregion
 
+        #region GetByID
         public override AssoProduitsFournisseurs_DAL GetByID(int ID)
         {
             throw new NotImplementedException();
         }
+        #endregion
 
+        #region Update
         public override AssoProduitsFournisseurs_DAL Update(AssoProduitsFournisseurs_DAL produits)
         {
             throw new NotImplementedException();
-
-
         }
+        #endregion
+
+        #region GetByIdProduit
         public List<AssoProduitsFournisseurs_DAL> GetByIdProduit(int idProduits)
         {
 
             CreerConnexionEtCommande();
 
-            commande.CommandText = "select idProduits, idFournisseurs from assoProduitsFournisseurs where idProduits=@idProduits ";
+            commande.CommandText = "select idProduits, idFournisseurs from assoProduitsFournisseurs " +
+                                   "where idProduits=@idProduits ";
             commande.Parameters.Add(new SqlParameter("@idProduits", idProduits));
             //pour lire les lignes une par une
             var reader = commande.ExecuteReader();
@@ -88,7 +98,8 @@ namespace EMI_RA.DAL
 
             while (reader.Read())
             {
-                var asso = new AssoProduitsFournisseurs_DAL(reader.GetInt32(0), reader.GetInt32(1));
+                var asso = new AssoProduitsFournisseurs_DAL(reader.GetInt32(0), 
+                                                            reader.GetInt32(1));
 
                 listeAssos.Add(asso);
             }
@@ -96,10 +107,10 @@ namespace EMI_RA.DAL
             DetruireConnexionEtCommande();
 
             return listeAssos;
-
-
         }
+        #endregion
 
+        #region GetByIdFournisseurs
         public AssoProduitsFournisseurs_DAL GetByIdFournisseurs(int idFournisseurs)
         {
             CreerConnexionEtCommande();
@@ -113,7 +124,8 @@ namespace EMI_RA.DAL
             AssoProduitsFournisseurs_DAL AssoProduitsFournisseurs;
             if (reader.Read())
             {
-                AssoProduitsFournisseurs = new AssoProduitsFournisseurs_DAL(reader.GetInt32(0), reader.GetInt32(2));
+                AssoProduitsFournisseurs = new AssoProduitsFournisseurs_DAL(reader.GetInt32(0), 
+                                                                            reader.GetInt32(2));
             }
             else
                 throw new Exception($"Pas de association produit fournisseur dans la BDD avec l'ID fournisseur {idFournisseurs}");
@@ -122,10 +134,13 @@ namespace EMI_RA.DAL
 
             return AssoProduitsFournisseurs;
         }
+        #endregion
 
+        #region Delete
         public override void Delete(AssoProduitsFournisseurs_DAL item)
         {
             throw new NotImplementedException();
         }
+        #endregion
     }
 }

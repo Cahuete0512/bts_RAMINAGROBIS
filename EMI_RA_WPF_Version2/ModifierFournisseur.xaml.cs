@@ -1,20 +1,8 @@
 ﻿using EMI_RA.API.Client;
-using EMI_RA.DTO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace EMI_RA.WPF
 {
@@ -23,7 +11,7 @@ namespace EMI_RA.WPF
     /// </summary>
     public partial class ModifierFournisseur : Page
     {
-
+        #region ModifierFournisseur
         public ModifierFournisseur(API.Client.Fournisseurs fournisseur)
         {
             InitializeComponent();
@@ -34,15 +22,14 @@ namespace EMI_RA.WPF
             prenom.Text = fournisseur.PrenomContact;
             email.Text = fournisseur.Email;
             adresse.Text = fournisseur.Adresse;
-
-
-
+            actif.IsChecked = fournisseur.Actif;
         }
+        #endregion
+
+        #region Button_Click
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
 
             var fournisseurDTO = new API.Client.Fournisseurs()
             {
@@ -52,12 +39,21 @@ namespace EMI_RA.WPF
                 NomContact = nom.Text,
                 PrenomContact = prenom.Text,
                 Email = email.Text,
-                Adresse = adresse.Text
-
+                Adresse = adresse.Text,
+                Actif = (bool)actif.IsChecked,
             };
 
             var fournisseur = await clientApi.FournisseursPUTAsync(fournisseurDTO);
             MessageBox.Show("Le fournisseur a été modifié");
+            if (actif.IsChecked == false)
+            {
+                MessageBox.Show("Le fournisseur a été désactivé");
+            }
+            else
+            {
+                MessageBox.Show("Le fournisseur est actif");
+            }
         }
+        #endregion
     }
 }
