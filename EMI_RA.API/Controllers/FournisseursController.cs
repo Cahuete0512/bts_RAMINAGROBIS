@@ -82,7 +82,7 @@ namespace EMI_RA.API.Controllers
         #endregion
 
         #region DeleteFournisseur
-        [HttpDelete("{id}")]
+        [HttpDelete("{IdFournisseurs}")]
         public void Delete([FromRoute] int IdFournisseurs)
         {
             service.Delete(new Fournisseurs(IdFournisseurs));

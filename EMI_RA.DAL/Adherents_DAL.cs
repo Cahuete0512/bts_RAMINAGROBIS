@@ -23,5 +23,15 @@ namespace EMI_RA.DAL
         public Adherents_DAL(int idAdherents, String societe, String civiliteContact, String nomContact, String prenomContact, String email, String adresse)
             => (ID, Societe, CiviliteContact, NomContact, PrenomContact, Email, Adresse) 
             = (idAdherents, societe, civiliteContact, nomContact, prenomContact, email, adresse);
+
+
+        public Adherents_DAL(int idAdherents)
+        {
+            ID = idAdherents;
+        }
+        public Adherents_DAL()
+        {
+
+        }
     }
 }
