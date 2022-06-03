@@ -14,8 +14,8 @@ namespace EMI_RA
         public List<AssoProduitsFournisseurs> GetAll()
         {
             var assoProduits = depot.GetAll()
-                .Select(a => new AssoProduitsFournisseurs(a.IdFournisseurs,
-                                                          a.IdProduits))
+                .Select(a => new AssoProduitsFournisseurs(a.IdProduits,
+                                                          a.IdFournisseurs))
                 .ToList();
 
             return assoProduits;
@@ -30,8 +30,8 @@ namespace EMI_RA
 
             foreach (var a in depot.GetByIdProduit(idProduits))
             {
-                AssoProduitsFournisseurs asso = new AssoProduitsFournisseurs(a.IdFournisseurs,
-                                                                             a.IdProduits);
+                AssoProduitsFournisseurs asso = new AssoProduitsFournisseurs(a.IdProduits, 
+                                                                             a.IdFournisseurs);
                 result.Add(asso);
             }
             return result;
@@ -43,16 +43,16 @@ namespace EMI_RA
         {
             var a = depot.GetByIdFournisseurs(idFournisseurs);
 
-            return new AssoProduitsFournisseurs(a.IdFournisseurs,
-                                                a.IdProduits);
+            return new AssoProduitsFournisseurs(a.IdProduits,
+                                                a.IdFournisseurs);
         }
         #endregion
 
         #region Insert
         public AssoProduitsFournisseurs Insert(AssoProduitsFournisseurs a)
         {
-            var assoProduits = new AssoProduitsFournisseurs_DAL(a.IdFournisseurs,
-                                                                a.IdProduits);
+            var assoProduits = new AssoProduitsFournisseurs_DAL(a.IdProduits,
+                                                                a.IdFournisseurs);
             depot.Insert(assoProduits);
 
             return a;
@@ -60,9 +60,9 @@ namespace EMI_RA
         #endregion
 
         #region Delete
-        public void Delete(int idProduits, int idFournisseurs)
+        public void Delete(int idFournisseurs, int idProduits)
         {
-            depot.Delete(idProduits, idFournisseurs);
+            depot.Delete(idFournisseurs, idProduits);
         }
         #endregion
     }

@@ -27,8 +27,8 @@ namespace EMI_RA.API.Controllers
         {
             return service.GetAll().Select(a => new AssoProduitsFournisseurs_DTO()
             {
-                IdFournisseurs= a.IdFournisseurs,
-                IdProduits = a.IdProduits
+                IdProduits = a.IdProduits,
+                IdFournisseurs = a.IdFournisseurs
             });
         }
         #endregion
@@ -37,8 +37,8 @@ namespace EMI_RA.API.Controllers
         [HttpPost]
         public AssoProduitsFournisseurs_DTO Insert(AssoProduitsFournisseurs_DTO a)
         {
-            var a_metier = service.Insert(new AssoProduitsFournisseurs(a.IdFournisseurs,
-                                                                       a.IdProduits));
+            var a_metier = service.Insert(new AssoProduitsFournisseurs(a.IdProduits,
+                                                                       a.IdFournisseurs));
            
             //je renvoie l'objet DTO
             return a;

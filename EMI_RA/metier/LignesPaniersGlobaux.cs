@@ -21,5 +21,7 @@ namespace EMI_RA
 
         public LignesPaniersGlobaux(int id, int idProduits, int quantites, int idPaniersGlobaux, int idAdherents) 
             => (ID, IDProduits, Quantite, IDPaniersGlobaux, IDAdherents) = (id, idProduits, quantites, idPaniersGlobaux, idAdherents);
+        public LignesPaniersGlobaux(int id, int idProduits, int quantites, int idPaniersGlobaux, int idAdherents, Produits produit)
+            => (ID, IDProduits, Quantite, IDPaniersGlobaux, IDAdherents, produit) = (id, idProduits, quantites, idPaniersGlobaux, idAdherents, produit);
     }
 }
