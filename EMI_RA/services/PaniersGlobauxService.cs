@@ -364,7 +364,8 @@ namespace EMI_RA
         #region LancerEnchere
         public void LancerEnchere(DateTime debutPeriode, DateTime finPeriode)
         {
-            var url = "http://127.0.0.1:8000/lancerEnchere";
+            //var url = "http://127.0.0.1:8000/lancerEnchere";
+            var url = "https://magalie-contant-bts.epsi-nantes.fr/enchere_inexistante";
 
             var request = WebRequest.Create(url);
             request.Method = "POST";
