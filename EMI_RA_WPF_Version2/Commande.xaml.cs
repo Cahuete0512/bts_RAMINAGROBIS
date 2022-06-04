@@ -43,7 +43,7 @@ namespace EMI_RA.WPF
                fichier.ToList().Add(fichiercsv.ElementAt(i));
             }
             
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
             var commande = clientApi.CommandeVersion2Async(adherent.Id, fichier);
         }
         #endregion

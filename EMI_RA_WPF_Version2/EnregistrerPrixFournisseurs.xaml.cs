@@ -45,7 +45,7 @@ namespace EMI_RA_WPF
             Nullable<bool> result = dlg.ShowDialog();
 
 
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
             var lefounisseur = clientApi.PanierAllAsync(fournisseur.IdFournisseurs);
 
 
@@ -80,7 +80,7 @@ namespace EMI_RA_WPF
                 fichier.ToList().Add(fichiercsv.ElementAt(i));
             }
 
-            var clientApi = new Client("https://localhost:44313/", new HttpClient());
+            var clientApi = new Client("https://localhost:5001/", new HttpClient());
             var commande = clientApi.Offres2Async(fournisseur.IdFournisseurs, fichier);
         }
         #endregion
