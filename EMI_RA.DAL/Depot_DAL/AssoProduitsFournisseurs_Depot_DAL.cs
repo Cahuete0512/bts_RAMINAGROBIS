@@ -43,7 +43,7 @@ namespace EMI_RA.DAL
         {
             CreerConnexionEtCommande();
 
-            commande.CommandText = "insert into assoProduitsFournisseurs (idFournisseurs, idProduits ) values (@idFournisseurs, @idProduits)";
+            commande.CommandText = "insert into assoProduitsFournisseurs (idProduits, idFournisseurs) values (@idProduits, @idFournisseurs)";
             commande.Parameters.Add(new SqlParameter("@idProduits", assoProduitsFournisseurs.IdProduits));
             commande.Parameters.Add(new SqlParameter("@idFournisseurs", assoProduitsFournisseurs.IdFournisseurs));
             commande.ExecuteNonQuery();
@@ -60,7 +60,7 @@ namespace EMI_RA.DAL
             CreerConnexionEtCommande();
 
             commande.CommandText = "delete from assoProduitsFournisseurs " +
-                                   "where idFournisseurs=@idFournisseurs and idProduits=@idProduits";
+                                   "where idProduits=@idProduits and idFournisseurs=@idFournisseurs";
             commande.Parameters.Add(new SqlParameter("@idProduits", idProduits));
             commande.Parameters.Add(new SqlParameter("@idFournisseurs", idFournisseurs));
             commande.ExecuteNonQuery();

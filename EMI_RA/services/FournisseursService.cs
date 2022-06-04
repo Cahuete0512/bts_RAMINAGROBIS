@@ -199,7 +199,7 @@ namespace EMI_RA
                         produitsService.Update(produitALier);
                     }
                     // pour les produits qui sont dans le fichier et non en BDD -> création du lien
-                    assoProduitsFournisseursServices.Insert(new AssoProduitsFournisseurs(idFournisseurs, produitALier.ID));
+                    assoProduitsFournisseursServices.Insert(new AssoProduitsFournisseurs(produitALier.ID, idFournisseurs));
                 }
             }
             // les produits qui sont dans la BDD et non dans le fichier -> suppression du lien BDD
