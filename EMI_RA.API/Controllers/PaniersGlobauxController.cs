@@ -64,8 +64,13 @@ namespace EMI_RA.API.Controllers
         [HttpGet("panier/{idFournisseur}")]
         public FileStreamResult getPanier([FromRoute] int idFournisseur)
         {
-            int annee = DateTime.Now.AddDays(-7).Year;
-            int semaine = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(-7), CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
+            //FIXME: Remettre AddDays(-7) pour que le scenario se déroule sur plusieurs semaines dans le respect du cahier des charges
+            int annee = DateTime.Now.Year; // AddDays(-7).Year;
+            //FIXME : décommenter pour que le scenario se déroule sur plusieurs semaines dans le respect du cahier des charges
+            // int semaine = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(-7), CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
+            
+            // Pour dérouler le scenario sur une semaine à des fins de démonstration sur un cours laps de temps (1 heure et non pas 2 semaines)
+            int semaine = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
 
             String filename = "Panier_" + annee + "_S" + semaine + ".csv";
 
@@ -82,8 +87,8 @@ namespace EMI_RA.API.Controllers
         [HttpGet("panier/Version test {idFournisseur}")]
         public List<String> getPanierVersionTest([FromRoute] int idFournisseur)
         {
-            int annee = DateTime.Now.AddDays(-7).Year;
-            int semaine = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(1), CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
+            int annee = DateTime.Now.Year;
+            int semaine = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now, CalendarWeekRule.FirstFullWeek, DayOfWeek.Monday);
 
             String filename = "Panier_" + annee + "_S" + semaine + ".csv";
 

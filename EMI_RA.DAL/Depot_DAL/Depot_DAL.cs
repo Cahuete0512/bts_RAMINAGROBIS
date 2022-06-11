@@ -29,6 +29,7 @@ namespace EMI_RA.DAL
             connexion = new SqlConnection(ChaineDeConnexion);
             connexion.Open();
             commande = new SqlCommand();
+            commande.CommandTimeout = 60;
             commande.Connection = connexion;
         }
         #endregion

@@ -107,7 +107,7 @@ namespace EMI_RA
         #region GetPanierSemainePrecedente
         public PaniersGlobaux GetPanierSemainePrecedente()
         {
-            int annee = DateTime.Now.AddDays(-7).Year;
+            int annee = DateTime.Now.Year;//.AddDays(-7).Year;
             int semaine = CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(DateTime.Now.AddDays(1), 
                                                                               CalendarWeekRule.FirstFullWeek, 
                                                                               DayOfWeek.Monday);
@@ -364,8 +364,8 @@ namespace EMI_RA
         #region LancerEnchere
         public void LancerEnchere(DateTime debutPeriode, DateTime finPeriode)
         {
-            //var url = "http://127.0.0.1:8000/lancerEnchere";
-            var url = "https://magalie-contant-bts.epsi-nantes.fr/enchere_inexistante";
+            var url = "http://127.0.0.1:8000/lancerEnchere";
+            //var url = "https://magalie-contant-bts.epsi-nantes.fr/lancerEnchere";
 
             var request = WebRequest.Create(url);
             request.Method = "POST";
